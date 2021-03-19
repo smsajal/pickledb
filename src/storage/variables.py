@@ -5,7 +5,8 @@ databaseStorageFilePath="/Users/sxs2561/Documents/OneDrive - The Pennsylvania St
 dataFilePrefix="data"
 datafileSuffixLength=10
 initialFileCountInTable=1
-maxOccupancyPerFile=100000
-initialFileOccupancyPercentage=60000
+maxOccupancyPerFile=3
+bulkInsertOccupancyCount=2
+singleInsertOccupancyCount=maxOccupancyPerFile
 
 

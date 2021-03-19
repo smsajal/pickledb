@@ -5,9 +5,11 @@ import variables as Var
 from fileTracker import FileTracker as FileTracker
 from dataFile import DataFile as DataFile
 import fileUtility as FileUtility
+from database import Database as Database
 
 import os
 import json
+import sys
 
 class Table():
 	def __init__(self,tableName,dbName):
@@ -51,15 +53,22 @@ class Table():
 		self.primaryKey=primaryKey
 
 	def insert( self, data, splittingPoint ):
-		print ( "\n\n===================\n" )
+
+		'''
+			args:
+				data: json object of data
+				splittingPoint: max number of entries in datafile after which the datafile has to split
+		'''
+
 		#todo: read fileTracker to find out which file to write to
 		# step-1: handle the empty db case
-		print("new data: ",data)
+
 		fTracker=FileTracker(self.fileTrackerPath)
 		fTrackerData=fTracker.getTrackerData()
 		fileToInsert=""
+
 		if fTrackerData[0]["keyStart"]=="-1":
-			print("new DB")
+
 			fTrackerData[0]["keyStart"]=data[self.primaryKey]
 			fTrackerData[0]["writeCount"]=1
 			fTrackerData[0]["entryCount"]=1
@@ -70,30 +79,28 @@ class Table():
 			dataFile = DataFile ( self.tablePath + fileToInsert )
 			tableData = dataFile.getTableData ( )
 			if "primaryKey" in tableData [ 0 ] :
-				# print("initial entry")
 				tableData = [ ]
 			tableData.append ( data )
 			dataFile.updateTableData ( tableData )
 
 		# step-2: handle already populated db case
 		else:
-			print("old DB")
+
 			entryPlace={}
 			counter=0
 			for trackerData in fTrackerData:
-				# print(trackerData["keyStart"]," --- ",data[self.primaryKey])
 				if trackerData["keyStart"]<data[self.primaryKey]:
 					entryPlace=trackerData
 					counter += 1
 				else:
-					print("entered the break")
 					break
+
 			fileToInsert=entryPlace["fileName"]
 			# entryPlace["writeCount"]=entryPlace["writeCount"]
 			# entryPlace["entryCount"]=entryPlace["entryCount"]
 			#todo: check if you need to split the file
 			if entryPlace["entryCount"]+1>splittingPoint:
-				print("needs split")
+
 				#todo: if file split is needed,
 					# 	i. create new fileTracker entries
 					# ii. create new file and set it up for new entry
@@ -104,9 +111,7 @@ class Table():
 				part1 = currentInsertFileData [ :len ( currentInsertFileData ) // 2 ]
 				part2=currentInsertFileData[len(currentInsertFileData)//2:]
 
-				print ( "total length: ", len ( currentInsertFileData )," part1.length: ",len(part1),"part2.len: ",len(part2) )
-				print("part1: ",part1)
-				print("part2: ",part2)
+
 
 				x=DataFile(self.tablePath+fileToInsert)
 				x.updateTableData(part1)
@@ -117,7 +122,7 @@ class Table():
 				fTrackerData.insert(counter-1,entryPlace)
 
 
-				# print("new entry: keyStart: ",part2 [ 0 ] )
+
 				newFileTrackerEntry = { "keyStart": part2 [ 0 ] [self.primaryKey ],
 										"fileName": "data_"+FileUtility.generateRandomString (Var.datafileSuffixLength )+".json",
 										"writeCount" : 0,
@@ -135,15 +140,15 @@ class Table():
 
 				fTrackerData.insert ( counter, newFileTrackerEntry )
 			else:
-				print("does not need split")
-				# print("fTrackerData:   ",fTrackerData)
+
+
 				fTrackerData.pop ( counter - 1 )
 
 				entryPlace["writeCount"]=entryPlace["writeCount"]+1
 				entryPlace["entryCount"]=entryPlace["entryCount"]+1
 
 				fTrackerData.insert(counter-1,entryPlace)
-				print("fileToInsert: ",fileToInsert)
+
 				dataFile = DataFile ( self.tablePath + fileToInsert )
 				tableData = dataFile.getTableData ( )
 				tableData.append ( data )
@@ -154,25 +159,37 @@ class Table():
 		#fixme: comment the next block out later
 		#todo: update fileTracker if necessary
 		fTracker.updateTrackerData (fTrackerData )
-		#todo: write data to dataFile
 
-
-		# dataFile = DataFile ( self.tablePath + fileToInsert )
-		# tableData = dataFile.getTableData ( )
-		# # case1: handle the initial dummy case
-		# if "primaryKey" in tableData[0]:
-		# 	# print("initial entry")
-		# 	tableData=[]
-		# # case2: handle the regular case
-		# # print("tableData: ",tableData)
-		# tableData.append(data)
-		# # print("tableData: ",tableData)
-		# dataFile.updateTableData(tableData)
 
 		return
 
+	def vanillaSelect( self, fields=[], limit=sys.maxsize ):
+
+		fileTracker=FileTracker(self.fileTrackerPath)
+		fileTrackerData=fileTracker.getTrackerData()
+		finalData=[]
+		if fields==[]:
+			fields=list(fileTrackerData[0].keys())
+			print("fields: ",fields)
+		for trackerData in fileTrackerData:
+			dataFilePath=self.tablePath+trackerData["fileName"]
+			data=[]
+			data=DataFile(dataFilePath).getTableData()
+			filteredDict=[dict ((key,x[key]) for key in fields if key in x) for x in data ]
+			finalData.extend(filteredDict)
+
+
+		#fixme: limit has not been implemented
+		print(finalData)
+		return finalData
+
+
+
+
+
 if __name__ == '__main__':
 	os.system('rm -rf "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/databases/db1/table1"')
+	db = Database ( "db1" )
 	y=Table(tableName = "table1",dbName = "db1")
 	y.createTable()
 	y.setPrimaryKey(primaryKey ="nconst" )
@@ -181,3 +198,5 @@ if __name__ == '__main__':
 	splittingPoint=3
 	for x in data:
 		y.insert(x,splittingPoint)
+
+	y.vanillaSelect( fields = [ "nconst", "primaryName" ] )

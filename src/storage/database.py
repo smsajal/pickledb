@@ -9,6 +9,8 @@ class Database:
 		dbPath=os.path.join(Var.databaseStorageFilePath,self.dbName)
 		os.mkdir(path = dbPath)
 
+	def getDatabaseName( self ):
+		return self.dbName
 
 
 if __name__ == '__main__':
