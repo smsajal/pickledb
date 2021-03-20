@@ -1,11 +1,10 @@
-import variables as Var
-# import fileTracker.FileTracker as FileTracker
-# import dataFile.DataFile as DataFile
+# import variables as Var
+import src.storage.variables as Var
 
-from fileTracker import FileTracker as FileTracker
-from dataFile import DataFile as DataFile
-import fileUtility as FileUtility
-from database import Database as Database
+from src.storage.fileTracker import FileTracker as FileTracker
+from src.storage.dataFile import DataFile as DataFile
+import src.storage.fileUtility as FileUtility
+from src.storage.database import Database as Database
 
 import os
 import json

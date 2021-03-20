@@ -1,6 +1,6 @@
 import src.storage.variables as StorageVariables
-import src.storage.database as Database
-import src.storage.table as Table
+from src.storage.database import Database as Database
+from src.storage.table import Table as Table
 
 def createDatabase(databaseName):
 	'''

@@ -1,4 +1,5 @@
-import variables as Var
+# import variables as Var
+import src.storage.variables as Var
 import os
 class Database:
 	def __init__(self,name):
@@ -7,6 +8,7 @@ class Database:
 
 	def createDbDirectory( self ):
 		dbPath=os.path.join(Var.databaseStorageFilePath,self.dbName)
+		print("creating directory: ",dbPath)
 		os.mkdir(path = dbPath)
 
 	def getDatabaseName( self ):
