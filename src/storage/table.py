@@ -190,6 +190,7 @@ class Table():
 if __name__ == '__main__':
 	os.system('rm -rf "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/databases/db1/table1"')
 	db = Database ( "db1" )
+	db.createDbDirectory()
 	y=Table(tableName = "table1",dbName = "db1")
 	y.createTable()
 	y.setPrimaryKey(primaryKey ="nconst" )
