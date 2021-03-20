@@ -11,14 +11,15 @@ import json
 import sys
 
 class Table():
-	def __init__(self,tableName,dbName):
+	def __init__(self,tableName,dbName, primaryKey=""):
 
 		self.tableName=tableName
 		self.dbName=dbName
 		self.fileTrackerPath=Var.databaseStorageFilePath+self.dbName+"/"+self.tableName+"/fileTracker.json"
 		self.dbPath=Var.databaseStorageFilePath+self.dbName+"/"
 		self.tablePath=self.dbPath  + self.tableName + "/"
-		self.primaryKey=""
+		self.primaryKey=primaryKey
+
 
 
 	def _createTableDirectory( self ):
@@ -51,6 +52,10 @@ class Table():
 	def setPrimaryKey( self,primaryKey ):
 		self.primaryKey=primaryKey
 
+
+	def getPrimaryKey ( self ) :
+		return self.primaryKey
+
 	def insert( self, data, splittingPoint ):
 
 		'''
@@ -65,6 +70,7 @@ class Table():
 		fTracker=FileTracker(self.fileTrackerPath)
 		fTrackerData=fTracker.getTrackerData()
 		fileToInsert=""
+
 
 		if fTrackerData[0]["keyStart"]=="-1":
 
@@ -183,16 +189,38 @@ class Table():
 		return finalData
 
 
+	def equalitySearch( self, fields=[], values=[]):
+
+		fileTracker=FileTracker(self.fileTrackerPath)
+		fileTrackerData=fileTracker.getTrackerData()
+		finalData=[]
+		if fields==[]:
+			fields=list(fileTrackerData[0].keys())
+			print("fields: ",fields)
+		for trackerData in fileTrackerData:
+			dataFilePath=self.tablePath+trackerData["fileName"]
+			data=[]
+			data=DataFile(dataFilePath).getTableData()
+			filteredDict=[dict ((key,x[key]) for key in fields if key in x) for x in data ]
+			finalData.extend(filteredDict)
+
+
+		#fixme: limit has not been implemented
+		print(finalData)
+		return finalData
+
 
 
 
 if __name__ == '__main__':
-	os.system('rm -rf "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/databases/db1/table1"')
-	db = Database ( "db1" )
+	# os.system('rm -rf "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/databases/db1/table1"')
+	db = Database ( "db2" )
 	db.createDbDirectory()
-	y=Table(tableName = "table1",dbName = "db1")
+	y=Table(tableName = "table1",dbName = "db2")
 	y.createTable()
+	print ( "Primary KEY:" + y.getPrimaryKey ( ) )
 	y.setPrimaryKey(primaryKey ="nconst" )
+	print (  "\nPrimary KEY:" +y.getPrimaryKey ( ) )
 	jsonFilePath="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/inputs/name_basics.json"
 	data=FileUtility.readJsonFile(jsonFilePath)
 	splittingPoint=3
