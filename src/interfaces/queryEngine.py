@@ -1,29 +1,85 @@
 import src.interfaces.storageInterface as storageInterface
 from src.storage.table import Table as dbTable
+import json
 
 def createDatabase(dbName):
-    storageInterface.createDatabase(dbName)
+    db = storageInterface.createDatabase(dbName)
+    if (db):
+        print("DataBase Created Successfully!")
 
 def createTable(dbName,tableName):
-    storageInterface.createTable(dbName,tableName)
+    table = storageInterface.createTable(dbName,tableName)
+    if (table):
+        print("Table Created Successfully!")
 
 def bulkInsertTable(tableObj,bulkData):
-    storageInterface.bulkInsert(tableObj,bulkData)
+    bulkDataList = json.loads(bulkData)
+    storageInterface.bulkInsert(tableObj,bulkDataList)
+    print("Bulk Insert Completed Successfully!")
 
 def tableInsert(tableObj,data):
-    storageInterface.insert(tableObj,data)
+    dataList = json.loads(data)
+    storageInterface.insert(tableObj,dataList)
+    print("Single Tuple Insert Completed Successfully!")
 
 def simpleSelect(tableObj,fields):
-    tableObj.vanillaSelect(fields)
+    fields_list = list(fields.split(","))
+    print("Select Values are as follows: ")
+    tableObj.vanillaSelect(fields_list)
+
+def interface():
+    print(30 * '-')
+    print("   M A I N - M E N U")
+    print(30 * '-')
+    print("1. Create DataBase")
+    print("2. Create Table")
+    print("3. Bulk Insert Into Table")
+    print("4. Single Insert Into Table")
+    print("5. Select Columns from Table")
+    print("6. Quit")
+    print(30 * '-')
+    choice = int(input("Enter your choice [1-6]: "))
+    return choice
+
+def interfaceCalls(choice):
+    if (choice == 1):                     #DB creation
+        dbName = input("Enter the name of the DataBase: ")
+        createDatabase(dbName)
+    elif (choice == 2):                   # Table creation in DB
+        dbName = input("Enter the name of the DataBase to be used: ")
+        tableName = input("Enter the name of the Table: ")
+        createTable(dbName, tableName)
+    elif (choice == 3):                   # Bulk Insert in Table
+        dbName = input("Enter the name of the DataBase to be used: ")
+        tableName = input("Enter the name of the Table to be used: ")
+        primaryKey = input("Enter the Primary Key Field: ")
+        TableObj = dbTable( tableName = tableName, dbName = dbName , primaryKey = primaryKey)
+        bulkData = input("Enter the Bulk Data is the form of a JSON array: ")
+        bulkInsertTable(TableObj,bulkData)
+    elif (choice == 4):                    # Single Tuple Insert in table
+        dbName = input("Enter the name of the DataBase to be used: ")
+        tableName = input("Enter the name of the Table to be used: ")
+        primaryKey = input("Enter the Primary Key Field: ")
+        TableObj = dbTable(tableName=tableName, dbName=dbName, primaryKey=primaryKey)
+        singleData = input("Enter the Single Data Row is the form of a JSON object: ")
+        tableInsert(TableObj,singleData)
+    elif (choice == 5):                    # Simple Select from Table
+        dbName = input("Enter the name of the DataBase to be used: ")
+        tableName = input("Enter the name of the Table to be used: ")
+        primaryKey = input("Enter the Primary Key Field: ")
+        TableObj = dbTable(tableName=tableName, dbName=dbName, primaryKey=primaryKey)
+        columns = input("Enter the columns separated by a ',': ")
+        simpleSelect(TableObj,columns)
+    elif (choice == 6):                   #Quit
+        print("QUIT")
+    else:                                 #Invalid Choice
+        print("Invalid Choice.")
 
 def main():
-    # createDatabase("db1")
-    # createTable("db1","table1")
-    MyTable = dbTable ( tableName = "table1", dbName = "db1" , primaryKey = "nconst")
-    # tableInsert(MyTable,{"nconst": "nm0000001", "primaryName": "Fred Astaire", "birthYear": "1899", "deathYear": "1987", "primaryProfession": "soundtrack,actor,miscellaneous", "knownForTitles": "tt0031983,tt0050419,tt0072308,tt0053137"})
-    # bulkInsertTable(MyTable,[{"nconst": "nm0000005", "primaryName": "Ingmar Bergman", "birthYear": "1918", "deathYear": "2007", "primaryProfession": "writer,director,actor", "knownForTitles": "tt0050976,tt0060827,tt0069467,tt0050986"}, {"nconst": "nm0000006", "primaryName": "Ingrid Bergman", "birthYear": "1915", "deathYear": "1982", "primaryProfession": "actress,soundtrack,producer", "knownForTitles": "tt0038109,tt0034583,tt0038787,tt0077711"}])
-
-    simpleSelect(MyTable,fields = ["nconst", "primaryName"])
+        choice = 0
+        while (choice < 6):
+            choice = interface()
+            interfaceCalls(choice)
 
 if __name__ == "__main__":
     main()
