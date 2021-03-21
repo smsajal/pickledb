@@ -194,15 +194,21 @@ class Table():
 		fileTracker=FileTracker(self.fileTrackerPath)
 		fileTrackerData=fileTracker.getTrackerData()
 		finalData=[]
-		if fields==[]:
-			fields=list(fileTrackerData[0].keys())
-			print("fields: ",fields)
+		columns = list ( fileTrackerData [ 0 ].keys ( ) )
+		# print ( "columns: ", columns )
 		for trackerData in fileTrackerData:
 			dataFilePath=self.tablePath+trackerData["fileName"]
 			data=[]
 			data=DataFile(dataFilePath).getTableData()
-			filteredDict=[dict ((key,x[key]) for key in fields if key in x) for x in data ]
-			finalData.extend(filteredDict)
+			# filteredDict=[ for x in data ]
+			for x in data:
+				for (field, value) in zip ( fields, values ) :
+					# print ( field, value )
+					if(x[field] == value):
+						print ( x[field], value )
+						finalData.append(x)
+
+			# finalData.extend(filteredDict)
 
 
 		#fixme: limit has not been implemented
@@ -214,9 +220,9 @@ class Table():
 
 if __name__ == '__main__':
 	# os.system('rm -rf "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/databases/db1/table1"')
-	db = Database ( "db2" )
+	db = Database ( "db1" )
 	db.createDbDirectory()
-	y=Table(tableName = "table1",dbName = "db2")
+	y=Table(tableName = "table1",dbName = "db1")
 	y.createTable()
 	print ( "Primary KEY:" + y.getPrimaryKey ( ) )
 	y.setPrimaryKey(primaryKey ="nconst" )

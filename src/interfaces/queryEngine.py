@@ -1,4 +1,4 @@
-import storageInterface as storageInterface
+import src.interfaces.storageInterface as storageInterface
 from src.storage.table import Table as dbTable
 import json
 
@@ -94,7 +94,6 @@ def main():
         while (choice < 7):
             choice = interface()
             interfaceCalls(choice)
-
 
 if __name__ == "__main__":
     main()
