@@ -17,7 +17,10 @@ def atomicWriteToFile(filePath,data):
 	tempfilePath=filePath+".tmp"
 	with open(tempfilePath,"w") as tempFile:
 		json.dump(data,tempFile)
-		os.remove(filePath)
+		try:
+			os.remove(filePath)
+		except OSError:
+			pass
 		os.rename(tempfilePath,filePath)
 	return
 
