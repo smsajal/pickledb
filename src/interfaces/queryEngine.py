@@ -3,32 +3,85 @@ from src.storage.table import Table as dbTable
 import json
 
 def createDatabase(dbName):
+    '''
+        args:
+            dbName: the name of the database to the created
+
+        equivalent to:
+            CREATE DATABASE dbName;
+    '''
     db = storageInterface.createDatabase(dbName)
     if (db):
         print("DataBase Created Successfully!")
 
 def createTable(dbName,tableName):
+    '''
+        args:
+            dbName: the name of the database to the created
+            tableName: the name of the table to be created
+
+        equivalent to:
+            CREATE TABLE tableName
+    '''
     table = storageInterface.createTable(dbName,tableName)
     if (table):
         print("Table Created Successfully!")
 
 def bulkInsertTable(tableObj,bulkData):
+    '''
+        args:
+            tableOBj: Object = {dbName, tableName, primaryKey}
+            bulkData: String in the form of a JSON Array
+
+        equivalent to:
+            INSERT INTO table_name (column1, column2, column3, ...)
+            VALUES (value1, value2, value3, ...),
+            (value1, value2, value3, ...), ..., (.....) ;
+    '''
     bulkDataList = json.loads(bulkData)
     storageInterface.bulkInsert(tableObj,bulkDataList)
     print("Bulk Insert Completed Successfully!")
 
 def bulkInsertTableJSON(tableObj,bulkDataJSONpath):
+    '''
+        args:
+            tableOBj: Object = {dbName, tableName, primaryKey}
+            bulkData: .json file containing a JSON Array
+
+        equivalent to:
+            INSERT INTO table_name (column1, column2, column3, ...)
+            VALUES (value1, value2, value3, ...),
+            (value1, value2, value3, ...), ..., (.....) ;
+    '''
     file = open(bulkDataJSONpath)
     bulkDataList = json.load(file)
     storageInterface.bulkInsert(tableObj, bulkDataList)
     print("Bulk Insert Completed Successfully!")
 
 def tableInsert(tableObj,data):
+    '''
+        args:
+            tableOBj: Object = {dbName, tableName, primaryKey}
+            bulkData: String in the form of a JSON Object
+
+        equivalent to:
+            INSERT INTO table_name (column1, column2, column3, ...)
+            VALUES (value1, value2, value3, ...);
+    '''
     dataList = json.loads(data)
     storageInterface.insert(tableObj,dataList)
     print("Single Tuple Insert Completed Successfully!")
 
 def simpleSelect(tableObj,fields):
+    '''
+        args:
+            tableOBj: Object = {dbName, tableName, primaryKey}
+            bulkData: List of attributes
+
+        equivalent to:
+            SELECT column1, column2, ...
+            FROM table_name;
+    '''
     fields_list = list(fields.split(","))
     print("Select Values are as follows: ")
     tableObj.vanillaSelect(fields_list)
