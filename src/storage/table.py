@@ -32,8 +32,9 @@ class Table():
 			fileTrackerPath=self.fileTrackerPath
 			data=[]
 			data.append({"keyStart":"-1","fileName":"data_0.json","writeCount":0,"entryCount":0})
-			with open(fileTrackerPath,"w") as fp:
-				json.dump(data,fp)
+			# with open(fileTrackerPath,"w") as fp:
+			# 	json.dump(data,fp)
+			FileUtility.atomicWriteToFile(filePath = fileTrackerPath,data = data)
 
 			#todo: create data files
 			# tableDirectoryPath=self.tablePath
@@ -41,8 +42,9 @@ class Table():
 				filePath=self.tablePath+Var.dataFilePrefix+"_"+str(i)+".json"
 				tableData=[]
 				tableData.append({"primaryKey":"key","data":"null"})
-				with open(filePath,"w") as f:
-					json.dump(tableData,f)
+				# with open(filePath,"w") as f:
+				# 	json.dump(tableData,f)
+				FileUtility.atomicWriteToFile(filePath = filePath,data = tableData)
 		else:
 			print("database does not exist! Table creation failed.")
 
@@ -135,10 +137,14 @@ class Table():
 										}
 
 				newFilePath=self.tablePath+newFileTrackerEntry["fileName"]
-				with open(newFilePath,"w") as json_file:
-					dataToWrite=[]
-					dataToWrite.append({"key":"null"})
-					json.dump(dataToWrite,json_file)
+				# with open(newFilePath,"w") as json_file:
+				# 	dataToWrite=[]
+				# 	dataToWrite.append({"key":"null"})
+				# 	json.dump(dataToWrite,json_file)
+
+				dataToWrite=[]
+				dataToWrite.append ( { "key" : "null" } )
+				FileUtility.atomicWriteToFile(filePath = newFilePath,data = dataToWrite)
 
 				x=DataFile(newFilePath)
 				x.updateTableData(part2)

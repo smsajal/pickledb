@@ -1,6 +1,7 @@
 import random
 import string
 import json
+import os
 def generateRandomString(stringLength):
 	choiceCharacters=string.ascii_letters+string.digits
 	result_str = ''.join ( random.choice ( choiceCharacters ) for i in range ( stringLength ) )
@@ -12,6 +13,17 @@ def readJsonFile(filePath):
 
 	return data
 
+def atomicWriteToFile(filePath,data):
+	tempfilePath=filePath+".tmp"
+	with open(tempfilePath,"w") as tempFile:
+		json.dump(data,tempFile)
+		os.remove(filePath)
+		os.rename(tempfilePath,filePath)
+	return
+
 if __name__ == '__main__':
-	x=readJsonFile("/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/inputs/name_basics.json")
+	sourceFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/inputs/atomic_tester_data.json"
+	x=readJsonFile(sourceFile)
+	x.extend([{'name': 'd4', 'age': 40}])
 	print(x)
+	atomicWriteToFile(sourceFile,x)

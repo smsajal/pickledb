@@ -1,4 +1,6 @@
 import json
+import src.storage.fileUtility as FileUtility
+
 class FileTracker():
 	def __init__(self,fileTrackerPath):
 		self.fileTrackerPath=fileTrackerPath
@@ -10,8 +12,10 @@ class FileTracker():
 
 	def updateTrackerData( self,trackerData ):
 		self.trackerData=trackerData
-		with open(self.fileTrackerPath,"w") as json_file:
-			json.dump(self.trackerData,json_file)
+		# with open(self.fileTrackerPath,"w") as json_file:
+		# 	json.dump(self.trackerData,json_file)
+		FileUtility.atomicWriteToFile(filePath = self.fileTrackerPath,data = self.trackerData)
+
 
 
 

@@ -1,5 +1,6 @@
 import csv
 import json
+import src.storage.fileUtility as FileUtility
 def convertToJson(sourceFilePath,destFilePath):
 	with open(sourceFilePath,"r") as sourceFile:
 		reader=csv.DictReader(sourceFile,delimiter="\t")
@@ -19,9 +20,10 @@ def convertToJson(sourceFilePath,destFilePath):
 			data.append(rowJsonContent)
 			lineCount+=1
 
-		with open(destFilePath,"w") as destFile:
-			# destFile.writelines("%s\n"%x for x in data)
-			json.dump(data,destFile)
+		# with open(destFilePath,"w") as destFile:
+		# 	json.dump(data,destFile)
+		FileUtility.atomicWriteToFile(filePath = destFilePath,data = data)
+
 
 
 
