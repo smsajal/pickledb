@@ -5,6 +5,7 @@ from src.storage.fileTracker import FileTracker as FileTracker
 from src.storage.dataFile import DataFile as DataFile
 import src.storage.fileUtility as FileUtility
 from src.storage.database import Database as Database
+from src.storage.tempResult import TempResult as TempResult
 
 import os
 import json
@@ -174,12 +175,12 @@ class Table():
 
 		return
 
-	def vanillaSelect( self, fields=[], limit=sys.maxsize ):
+	def vanillaSelect( self, fields=None ):
 
 		fileTracker=FileTracker(self.fileTrackerPath)
 		fileTrackerData=fileTracker.getTrackerData()
 		finalData=[]
-		if fields==[]:
+		if fields is None:
 			fields=list(fileTrackerData[0].keys())
 			print("fields: ",fields)
 		for trackerData in fileTrackerData:
@@ -190,12 +191,20 @@ class Table():
 			finalData.extend(filteredDict)
 
 
-		#fixme: limit has not been implemented
+
+
 		print(finalData)
-		return finalData
+
+		return TempResult(finalData)
+		# return finalData
 
 
-	def equalitySearch( self, fields=[], values=[]):
+	def equalitySearch( self, fields=None, values=None):
+
+		if fields is None:
+			fields=[]
+		if values is None:
+			values=[]
 
 		fileTracker=FileTracker(self.fileTrackerPath)
 		fileTrackerData=fileTracker.getTrackerData()
@@ -217,9 +226,10 @@ class Table():
 			# finalData.extend(filteredDict)
 
 
-		#fixme: limit has not been implemented
+
 		print(finalData)
-		return finalData
+		return TempResult(finalData)
+		# return finalData
 
 
 
