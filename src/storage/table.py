@@ -5,11 +5,12 @@ from src.storage.fileTracker import FileTracker as FileTracker
 from src.storage.dataFile import DataFile as DataFile
 import src.storage.fileUtility as FileUtility
 from src.storage.database import Database as Database
-from src.storage.tempResult import TempResult as TempResult
+# from src.storage.tempResult import TempResult as TempResult
 
 import os
 import json
 import sys
+import datetime
 
 class Table():
 	def __init__(self,tableName,dbName, primaryKey=""):
@@ -81,6 +82,7 @@ class Table():
 			fTrackerData[0]["writeCount"]=1
 			fTrackerData[0]["entryCount"]=1
 			fileToInsert=fTrackerData[0]["fileName"]
+			# print("~~~~~~~~~~~~~ fileToInsert: ",fileToInsert)
 
 
 			fTracker.updateTrackerData ( fTrackerData )
@@ -97,12 +99,13 @@ class Table():
 			entryPlace={}
 			counter=0
 			for trackerData in fTrackerData:
-				if trackerData["keyStart"]<data[self.primaryKey]:
+				if trackerData["keyStart"]<=data[self.primaryKey]:
 					entryPlace=trackerData
 					counter += 1
 				else:
 					break
-
+			# print("~~~~~~~~~~~~~~ ftrackerData: ",fTrackerData)
+			# print("~~~~~~~~~~~~~~~ entryPlace: ",entryPlace)
 			fileToInsert=entryPlace["fileName"]
 			# entryPlace["writeCount"]=entryPlace["writeCount"]
 			# entryPlace["entryCount"]=entryPlace["entryCount"]
@@ -181,7 +184,10 @@ class Table():
 		fileTrackerData=fileTracker.getTrackerData()
 		finalData=[]
 		if fields is None:
-			fields=list(fileTrackerData[0].keys())
+			# fields=list(fileTrackerData[0].keys())
+			firstDataFile=self.tablePath+fileTrackerData[0]["fileName"]
+			firstData=DataFile(firstDataFile).getTableData()
+			fields=list(firstData[0].keys())
 			print("fields: ",fields)
 		for trackerData in fileTrackerData:
 			dataFilePath=self.tablePath+trackerData["fileName"]
@@ -195,16 +201,23 @@ class Table():
 
 		print(finalData)
 
-		return TempResult(finalData)
-		# return finalData
+		# return TempResult(finalData)
+		return finalData
 
 
 	def equalitySearch( self, fields=None, values=None):
 
 		if fields is None:
 			fields=[]
+			print("no fields specified")
+			return
 		if values is None:
 			values=[]
+			print("no equality values specified")
+			return
+		if len(fields)!=len(values):
+			print("not all fields have values specified")
+			return
 
 		fileTracker=FileTracker(self.fileTrackerPath)
 		fileTrackerData=fileTracker.getTrackerData()
@@ -228,25 +241,27 @@ class Table():
 
 
 		print(finalData)
-		return TempResult(finalData)
-		# return finalData
+		# return TempResult(finalData)
+		return finalData
 
 
 
 
 if __name__ == '__main__':
 	# os.system('rm -rf "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/databases/db1/table1"')
-	db = Database ( "db1" )
-	db.createDbDirectory()
-	y=Table(tableName = "table1",dbName = "db1")
+	a=datetime.datetime.now()
+	# db = Database ( "imdb_kaggle_big" )
+	# db.createDbDirectory()
+	y=Table(tableName = "imdb_movies",dbName = "imdb_kaggle_big")
 	y.createTable()
 	print ( "Primary KEY:" + y.getPrimaryKey ( ) )
-	y.setPrimaryKey(primaryKey ="nconst" )
+	y.setPrimaryKey(primaryKey ="imdb_title_id" )
 	print (  "\nPrimary KEY:" +y.getPrimaryKey ( ) )
-	jsonFilePath="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/inputs/name_basics.json"
+	jsonFilePath="/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/imdb_kaggle_dataset/full/jsons/imdb_movies.json"
 	data=FileUtility.readJsonFile(jsonFilePath)
-	splittingPoint=3
+	splittingPoint=1000
 	for x in data:
 		y.insert(x,splittingPoint)
-
-	y.vanillaSelect( fields = [ "nconst", "primaryName" ] )
+	b=datetime.datetime.now()
+	print("duration: ",(b-a))
+	# y.vanillaSelect( fields = [ "nconst", "primaryName" ] )

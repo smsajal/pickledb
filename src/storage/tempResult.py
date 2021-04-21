@@ -1,5 +1,9 @@
 from random import sample
 import statistics
+import datetime
+from src.storage.table import Table as Table
+
+
 '''
 	variables:
 		data = the data of the tempResult
@@ -15,6 +19,8 @@ class TempResult():
 		self.data=data
 		self.fieldNames=list(data[0].keys())
 
+	def getData( self ):
+		return self.data
 
 	def vanillaSelect( self, fields=None, limit=None ):
 		'''
@@ -95,7 +101,7 @@ class TempResult():
 		if field is None:
 			print("invalid field name")
 			return
-		dataPoints=[x[field] for x in self.data]
+		dataPoints=[float(x[field]) for x in self.data]
 		return statistics.median(dataPoints)
 
 	def min( self,field=None ):
@@ -103,7 +109,7 @@ class TempResult():
 			print("invalid field name")
 			return
 
-		return min([x[field] for x in self.data])
+		return min([float(x[field]) for x in self.data])
 
 
 	def max( self,field=None ):
@@ -111,14 +117,14 @@ class TempResult():
 			print("invalid field name")
 			return
 
-		return max([x[field] for x in self.data])
+		return max([float(x[field]) for x in self.data])
 
 	def stdDev( self,field=None ):
 		if field is None:
 			print("invalid field name")
 			return
 
-		return statistics.stdev([x[field] for x in self.data])
+		return statistics.stdev([float(x[field]) for x in self.data])
 
 	def count( self ):
 		return len(self.data)
@@ -128,24 +134,55 @@ class TempResult():
 			print("invalid field name")
 			return
 
-		return sum( x[field ] for x in  self.data)
-
+		return sum( float(x[field ]) for x in  self.data)
+	def print( self ):
+		print("------------------------------------")
+		for x in self.data:
+			print(x)
+		print ( "------------------------------------" )
+		return
 #todo: test these functions
 
 def main():
+	a = datetime.datetime.now ( )
 	# todo: create a table
+	table=Table(tableName="imdb_movies", dbName="imdb_kaggle_big")
 	# todo: get vanilla select on table => result1
+	# table.vanillaSelect()
+	select1Result=TempResult(table.vanillaSelect())
 	# todo: do equality search on table => result2
 	# todo: do limit on result1 and result2
+	limit1Result=select1Result.limit(limitCount = 50000)
+	print(len(limit1Result.data))
 	# todo: do orderBy on result1 and result2
+	order1Result=limit1Result.orderBy(field = "title")
+	# order1Result.print()
 	# todo: sample on result1 and result2
+	sample1Result=order1Result.sample(sampleCount = 50000)
+
 	# todo: mean on result1 and result2
+	mean1=sample1Result.mean(field = "duration")
+	print("mean duration: ",mean1)
 	# todo: median on result1 and result2
+	median1=sample1Result.median(field = "duration")
+	print("median duration: ",median1)
 	# todo: min on result1 and result2
+	min1=sample1Result.min(field = "duration")
+	print("min duration: ",min1)
 	# todo: max on result1 and result2
+	max1=sample1Result.max(field = "duration")
+	print("max duration: ",max1)
 	# todo: stdDev on result1 and result2
+	stdDev1=sample1Result.stdDev(field = "duration")
+	print("stddev duration: ",stdDev1)
 	# todo: count on result1 and result2
+	count1=sample1Result.count()
+	print("count: ",count1)
 	# todo: sum on result1 and result2
+	sum1=sample1Result.sum(field = "duration")
+	print("sum duration: ",sum1)
+	b = datetime.datetime.now ( )
+	print ( "duration: ", (b - a) )
 
 	return
 
