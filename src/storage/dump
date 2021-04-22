@@ -1,0 +1,2 @@
+movies=Table("imdb_movies").vanillaSelect() ===== cacheString= "imdb_movies.vanillaSelect()"
+limit1=movies.limit(10000) ====== cacheString = "imdb_movies.vanillaSelect().limit(10000)"

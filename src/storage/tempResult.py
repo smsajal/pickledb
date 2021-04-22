@@ -16,7 +16,9 @@ class TempResult():
 			data = a list of json objects, json keys would be table field name
 	'''
 	def __init__(self,data):
+		self.cacheKey=""
 		self.data=data
+
 		self.fieldNames=list(data[0].keys())
 
 	def getData( self ):

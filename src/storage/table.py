@@ -252,12 +252,12 @@ if __name__ == '__main__':
 	a=datetime.datetime.now()
 	# db = Database ( "imdb_kaggle_big" )
 	# db.createDbDirectory()
-	y=Table(tableName = "imdb_movies",dbName = "imdb_kaggle_big")
+	y=Table(tableName = "imdb_names",dbName = "imdb_kaggle_big")
 	y.createTable()
 	print ( "Primary KEY:" + y.getPrimaryKey ( ) )
-	y.setPrimaryKey(primaryKey ="imdb_title_id" )
+	y.setPrimaryKey(primaryKey ="imdb_name_id" )
 	print (  "\nPrimary KEY:" +y.getPrimaryKey ( ) )
-	jsonFilePath="/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/imdb_kaggle_dataset/full/jsons/imdb_movies.json"
+	jsonFilePath="/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/imdb_kaggle_dataset/full/jsons/imdb_names.json"
 	data=FileUtility.readJsonFile(jsonFilePath)
 	splittingPoint=1000
 	for x in data:
