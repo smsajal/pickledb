@@ -257,7 +257,8 @@ if __name__ == '__main__':
 	print ( "Primary KEY:" + y.getPrimaryKey ( ) )
 	y.setPrimaryKey(primaryKey ="imdb_name_id" )
 	print (  "\nPrimary KEY:" +y.getPrimaryKey ( ) )
-	jsonFilePath="/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/imdb_kaggle_dataset/full/jsons/imdb_names.json"
+	jsonFilePath = "/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/inputs/name_basics.json"
+	# jsonFilePath="/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/imdb_kaggle_dataset/full/jsons/imdb_names.json"
 	data=FileUtility.readJsonFile(jsonFilePath)
 	splittingPoint=1000
 	for x in data:
