@@ -1,0 +1,11 @@
+[
+  {
+    "readPercentage": 0.9,
+    "totalQueries": 5
+  },
+  {
+
+  "readPercentage": 0.3,
+  "totalQueries": 6
+}
+]
