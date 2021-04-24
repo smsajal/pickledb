@@ -1,0 +1,6 @@
+{
+  "readQueries":[
+    "table1.limit(limitCount=5000)",
+    "table1.sample(sampleCount=5000).mean(field='duration')"
+  ]
+}
