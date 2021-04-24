@@ -24,6 +24,11 @@ def atomicWriteToFile(filePath,data):
 		os.rename(tempfilePath,filePath)
 	return
 
+def writeToJsonFile(filePath,data):
+	with open(filePath,"w") as outfile:
+		json.dump(data,outfile)
+	return
+
 if __name__ == '__main__':
 	sourceFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/inputs/atomic_tester_data.json"
 	x=readJsonFile(sourceFile)
