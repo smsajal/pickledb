@@ -1,6 +1,22 @@
 {
   "readQueries":[
-    "table1.limit(limitCount=5000)",
-    "table1.sample(sampleCount=5000).mean(field='duration')"
+    "movies.limit(limitCount=5000)",
+    "movies.sample(sampleCount=5000).mean(field='duration')",
+    "names.limit(limitCount=5000)",
+    "names.sample(sampleCount=5000)",
+    "ratings.limit(limitCount=5000)",
+    "ratings.sample(sampleCount=5000)",
+    "title_principals.limit(limitCount=5000)",
+    "title_principals.sample(sampleCount=5000)"
+  ],
+  "writeQueries":[
+    "movies.limit(limitCount=5000)",
+    "movies.sample(sampleCount=5000).mean(field='duration')",
+    "names.limit(limitCount=5000)",
+    "names.sample(sampleCount=5000)",
+    "ratings.limit(limitCount=5000)",
+    "ratings.sample(sampleCount=5000)",
+    "title_principals.limit(limitCount=5000)",
+    "title_principals.sample(sampleCount=5000)"
   ]
 }
