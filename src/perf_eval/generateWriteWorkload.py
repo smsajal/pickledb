@@ -1,5 +1,9 @@
 import random
 import string
+import json
+from src.storage.table import Table
+from src.storage.tempResult import TempResult
+from src.interfaces import queryEngine
 
 letters = string.ascii_lowercase
 numbers = string.digits
@@ -85,7 +89,7 @@ def generateNames(primaryKey):
 #all primary key values greater than tt0053000 (tt0052961)
 def generateRatings(primaryKey):
     voteCount = 0
-    query = "tableInsert(names, {'imdb_title_id': '"
+    query = "tableInsert(ratings, {'imdb_title_id': '"
     query = query + primaryKey + "', 'weighted_average_vote': '"
     randomString = ''.join(random.choice(numbers) for i in range(1))
     query = query + randomString + "."
@@ -176,17 +180,17 @@ def generateRatings(primaryKey):
 
 #all primary key values greater than  (tt0052961)
 def generateTitle_principals():
-    query = "tableInsert(names, {'imdb_title_id': 'tt00"
+    query = "queryEngine.tableInsert(title_principals, \"{\"imdb_title_id\": \"tt00"
     randomString = ''.join(random.choice(numbers) for i in range(5))
-    query = query + randomString + "', 'ordering': '"
+    query = query + randomString + "\", \"ordering\": \""
     randomString = ''.join(random.choice(numbers) for i in range(1))
-    query = query + randomString + "', 'imdb_name_id': 'nm00"
+    query = query + randomString + "\", \"imdb_name_id\": \"nm00"
     randomString = ''.join(random.choice(numbers) for i in range(5))
-    query = query + randomString + "', 'category': '"
+    query = query + randomString + "\", \"category\": \""
     randomString = ''.join(random.choice(letters) for i in range(5))
-    query = query + randomString + "', 'job': '', 'characters': '[\""
+    query = query + randomString + "\", \"job\": \"\", \"characters\": \"[\'"
     randomString = ''.join(random.choice(letters) for i in range(5))
-    query = query + randomString + "\"]'})"
+    query = query + randomString + "\']\"}\")"
     print(query)
     return query
 
@@ -200,4 +204,10 @@ if __name__ == '__main__':
     q = generateRatings("tt0063001")
     print(q)
     q = generateTitle_principals()
-    print(q)
+    print(q, "\n")
+    title_principals = Table(tableName="title_principals", dbName="imdb_kaggle_small").vanillaSelect()
+    # ret = eval("queryEngine.tableInsert(title_principals, \"{\\\"imdb_title_id\\\": \\\"tt0063852\\\", \\\"ordering\\\": \\\"2\\\", \\\"imdb_name_id\\\": \\\"nm0028414\\\", \\\"category\\\": \\\"hllnf\\\", \\\"job\\\": \\\"\\\", \\\"characters\\\": \\\"[\\\\\\\"xeczz\\\\\\\"]\\\"}\") ")
+    # print(ret)
+    x=json.loads("{\"imdb_title_id\": \"tt0018113\", \"ordering\": \"1\", \"imdb_name_id\": \"nm0841797\", \"category\": \"actress\", \"job\": \"\", \"characters\": \"[\\\"Sunya Ashling\\\"]\"}")
+    queryEngine.tableInsert(
+        title_principals,x )
