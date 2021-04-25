@@ -82,7 +82,7 @@ def tableInsert(tableName,dbName,primaryKey,data):
     print("Single Tuple Insert Completed Successfully!")
 
 
-def simpleSelect(tableName,dbName,primaryKey,fields):
+def simpleSelect(tableName,dbName,primaryKey,fields=None):
     '''
         args:
             tableName: Name of the table
@@ -95,9 +95,14 @@ def simpleSelect(tableName,dbName,primaryKey,fields):
             FROM table_name;
     '''
     tableObj = dbTable(tableName=tableName, dbName=dbName, primaryKey=primaryKey)
-    fields_list = list(fields.split(","))
-    print("Select Values are as follows: ")
-    tableObj.vanillaSelect(fields_list)
+
+    if not (fields is None):
+        fields_list = list(fields.split(","))
+        print("Select Values are as follows: ")
+        tableObj.vanillaSelect(fields_list)
+        return
+    tableObj.vanillaSelect()
+
 
 def sample(tableName,dbName,sampleSize):
     '''
@@ -123,7 +128,7 @@ def limitResult(tableName,dbName,limit):
         limitResult = result(tableObj.vanillaSelect()).limit(limit)
         print("Limit Result length: ", len(limitResult.data))
 
-def orderBy(tableName,dbName,field,limit):
+def orderBy(tableName,dbName,field,limit=0):
     '''
         args:
             tableName: Name of the table
@@ -142,6 +147,8 @@ def orderBy(tableName,dbName,field,limit):
     orderResult = selectResult.orderBy(field=field)
     print("Order Result Length: ", len(orderResult.data))
 
+# mean(limitCount=100)
+# limit(limitCount=100).mean()
 def mean(tableName,dbName,field,limit):
     '''
         args:
