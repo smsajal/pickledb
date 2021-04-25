@@ -514,10 +514,6 @@ def main():
         choice = interface()
         interfaceCalls(choice)
 
-    # tableObj = dbTable(tableName="tablex", dbName="dbx", primaryKey="nconst")
-    # x = TempResult(tableObj.vanillaSelect(fields=["nconst"]))
-    # x.print()
-
     # simpleSelect(tableName = "tablex", dbName = "dbx", primaryKey = "nconst")
 
     # limitResult(tableName = "imdb_movies", dbName = "imdb_kaggle_small", limit = 5)
