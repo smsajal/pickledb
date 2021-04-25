@@ -12,11 +12,11 @@ from src.storage.tempResult import TempResult
 def atomicOnTest():
 
 	configFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/config.json"
-	queryFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/tempWorkload.json"
+	workloadFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/tempWorkload.json"
 	latencyRecordFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/latencies.json"
 
 	configuration=FileUtility.readJsonFile(configFile)
-	queries=FileUtility.readJsonFile(queryFile)
+	queries=FileUtility.readJsonFile(workloadFile)
 
 	readQueries=queries["readQueries"]
 	writeQueries=queries["writeQueries"]
@@ -41,7 +41,7 @@ def atomicOnTest():
 		writeQueryIndexes=random.sample(range(0,writeQueriesCount),writeQueriesCount)
 		writeQueriesToRun=[writeQueries[x] for x in writeQueryIndexes]
 
-		print(" ********  readqueries count: ",len(readQueriesToRun)," writequeries count: ",len(writeQueriesToRun))
+		print(" ********  read-queries count: ",len(readQueriesToRun)," write-queries count: ",len(writeQueriesToRun))
 
 
 		latency=[]
