@@ -18,6 +18,7 @@ def atomicOnTest():
 	configuration=FileUtility.readJsonFile(configFile)
 	queries=FileUtility.readJsonFile(workloadFile)
 
+	# fixme: separate read and write queries in different files
 	readQueries=queries["readQueries"]
 	writeQueries=queries["writeQueries"]
 
