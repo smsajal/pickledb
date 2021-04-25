@@ -43,8 +43,7 @@ def bulkInsertTable(tableName, dbName, primaryKey, bulkData):
             (value1, value2, value3, ...), ..., (.....) ;
     '''
     tableObj = dbTable(tableName=tableName, dbName=dbName, primaryKey=primaryKey)
-    bulkDataList = json.loads(bulkData)
-    storageInterface.bulkInsert(tableObj,bulkDataList)
+    storageInterface.bulkInsert(tableObj,bulkData)
     print("Bulk Insert Completed Successfully!")
 
 def bulkInsertTableJSON(tableName, dbName, primaryKey, bulkDataJSONpath):
@@ -79,7 +78,6 @@ def tableInsert(tableName,dbName,primaryKey,data):
             VALUES (value1, value2, value3, ...);
     '''
     tableObj = dbTable(tableName=tableName, dbName=dbName, primaryKey=primaryKey)
-    # dataList = json.loads(data)
     storageInterface.insert(tableObj,data)
     print("Single Tuple Insert Completed Successfully!")
 
@@ -378,6 +376,7 @@ def interfaceCalls(choice):
         tableName = input("Enter the name of the Table to be used: ")
         primaryKey = input("Enter the Primary Key Field: ")
         bulkData = input("Enter the Bulk Data is the form of a JSON array: ")
+        bulkData = json.loads(bulkData)
         bulkInsertTable(tableName, dbName, primaryKey, bulkData)
     elif (choice == 4):                 # Bulk Insert in Table from JSON file
         dbName = input("Enter the name of the DataBase to be used: ")
@@ -390,7 +389,7 @@ def interfaceCalls(choice):
         tableName = input("Enter the name of the Table to be used: ")
         primaryKey = input("Enter the Primary Key Field: ")
         singleData = input("Enter the Single Data Row is the form of a JSON object: ")
-        json.loads(singleData)
+        singleData = json.loads(singleData)
         tableInsert(tableName,dbName,primaryKey,singleData)
     elif (choice == 6):                    # Simple Select from Table
         dbName = input("Enter the name of the DataBase to be used: ")
