@@ -98,13 +98,13 @@ def simpleSelect(tableName,dbName,primaryKey,fields=None):
 
     if not (fields is None):
         fields_list = list(fields.split(","))
-        print("Select Values are as follows: ")
+        # print("Select Values are as follows: ")
         x = TempResult(tableObj.vanillaSelect(fields_list))
-        x.print()
+        # x.print()
         toReturn = x.data
     else:
         x = TempResult(tableObj.vanillaSelect())
-        x.print()
+        # x.print()
         toReturn = x.data
     return toReturn
 
@@ -119,8 +119,8 @@ def sample(tableName,dbName,sampleSize):
     if sampleSize > 0:
         tableObj = dbTable(tableName=tableName, dbName=dbName)
         sampleResult = result(tableObj.vanillaSelect()).sample(sampleSize)
-        print(sampleResult.data)
-        print("Sample Result Length: ", len(sampleResult.data))
+        # print(sampleResult.data)
+        # print("Sample Result Length: ", len(sampleResult.data))
         return sampleResult.data
 
 def limitResult(tableName,dbName,limit):
@@ -133,8 +133,8 @@ def limitResult(tableName,dbName,limit):
     if limit > 0:
         tableObj = dbTable(tableName=tableName, dbName=dbName)
         limitResult = result(tableObj.vanillaSelect()).limit(limit)
-        print(limitResult.data)
-        print("Limit Result length: ", len(limitResult.data))
+        # print(limitResult.data)
+        # print("Limit Result length: ", len(limitResult.data))
         return limitResult.data
 
 def orderBy(tableName,dbName,field,limit=0):
@@ -154,8 +154,8 @@ def orderBy(tableName,dbName,field,limit=0):
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
 
     orderResult = selectResult.orderBy(field=field)
-    print(orderResult.data)
-    print("Order Result Length: ", len(orderResult.data))
+    # print(orderResult.data)
+    # print("Order Result Length: ", len(orderResult.data))
     return orderResult.data
 
 # mean(limitCount=100)
@@ -177,7 +177,7 @@ def mean(tableName,dbName,field,limit=0):
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
 
     meanResult = selectResult.mean(field=field)
-    print("Mean: ", meanResult)
+    # print("Mean: ", meanResult)
     return meanResult
 
 def median(tableName,dbName,field,limit=0):
@@ -197,7 +197,7 @@ def median(tableName,dbName,field,limit=0):
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
 
     medianResult = selectResult.median(field=field)
-    print("Median: ", medianResult)
+    # print("Median: ", medianResult)
     return medianResult
 
 def min(tableName,dbName,field,limit=0):
@@ -216,7 +216,7 @@ def min(tableName,dbName,field,limit=0):
     else:
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
     min = selectResult.min(field=field)
-    print("Min: ", min)
+    # print("Min: ", min)
     return min
 
 def max(tableName,dbName,field,limit=0):
@@ -236,7 +236,7 @@ def max(tableName,dbName,field,limit=0):
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
 
     max = selectResult.max(field=field)
-    print("Max: ", max)
+    # print("Max: ", max)
     return max
 
 def stdDev(tableName,dbName,field,limit=0):
@@ -255,7 +255,7 @@ def stdDev(tableName,dbName,field,limit=0):
     else:
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
     stddev = selectResult.stdDev(field=field)
-    print("Standard Dev: ", stddev)
+    # print("Standard Dev: ", stddev)
     return stddev
 
 def sum(tableName,dbName,field,limit=0):
@@ -274,7 +274,7 @@ def sum(tableName,dbName,field,limit=0):
     else:
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
     sum = selectResult.sum(field=field)
-    print("Sum: ", sum)
+    # print("Sum: ", sum)
     return sum
 
 def count(tableName,dbName,limit):
@@ -292,7 +292,8 @@ def count(tableName,dbName,limit):
     else:
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
     count = selectResult.count()
-    print("count: ",count)
+    # print("count: ",count)
+    return count
 
 def nestedLoopJoin(dbName,table1,table2,commonField,commonLimit=0):
     '''
@@ -313,7 +314,7 @@ def nestedLoopJoin(dbName,table1,table2,commonField,commonLimit=0):
         TableSet2 = result(tableObj2.vanillaSelect()).limit(commonLimit)
     nestedLoopResult = join.nestedLoopJoin(tempResult1=TableSet1, joinField1=commonField, tempResult2=TableSet2, joinField2=commonField)
     nestedLoopResult.print()
-    print("Size of Nested Loop Join Result: ", len(nestedLoopResult.data))
+    # print("Size of Nested Loop Join Result: ", len(nestedLoopResult.data))
     return nestedLoopResult.data
 
 def hashJoin(dbName,table1,table2,commonField,commonLimit=0):
@@ -335,8 +336,8 @@ def hashJoin(dbName,table1,table2,commonField,commonLimit=0):
         TableSet2 = result(tableObj2.vanillaSelect()).limit(commonLimit)
     hashJoinResult = join.hashJoin(tempResult1=TableSet1, joinField1=commonField, tempResult2=TableSet2, joinField2=commonField)
     # hashJoinResult.print()
-    print(hashJoinResult.data)
-    print("Size of Hash Join Result: ", len(hashJoinResult.data))
+    # print(hashJoinResult.data)
+    # print("Size of Hash Join Result: ", len(hashJoinResult.data))
     return hashJoinResult.data
 
 def sortedMergeJoin(dbName,table1,table2,commonField,commonLimit=0):
@@ -357,8 +358,8 @@ def sortedMergeJoin(dbName,table1,table2,commonField,commonLimit=0):
         TableSet1 = result(tableObj1.vanillaSelect()).limit(commonLimit)
         TableSet2 = result(tableObj2.vanillaSelect()).limit(commonLimit)
     sortMergeResult = join.sortedMergeJoin(tempResult1=TableSet1, joinField1=commonField, tempResult2=TableSet2, joinField2=commonField)
-    sortMergeResult.print()
-    print("Size of Sort Merge Join Result: ", len(sortMergeResult.data))
+    # sortMergeResult.print()
+    # print("Size of Sort Merge Join Result: ", len(sortMergeResult.data))
     return sortMergeResult.data
 
 

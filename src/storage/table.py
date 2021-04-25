@@ -188,7 +188,7 @@ class Table():
 			firstDataFile=self.tablePath+fileTrackerData[0]["fileName"]
 			firstData=DataFile(firstDataFile).getTableData()
 			fields=list(firstData[0].keys())
-			print("fields: ",fields)
+			# print("fields: ",fields)
 		for trackerData in fileTrackerData:
 			dataFilePath=self.tablePath+trackerData["fileName"]
 			data=[]
@@ -233,14 +233,14 @@ class Table():
 				for (field, value) in zip ( fields, values ) :
 					# print ( field, value )
 					if(x[field] == value):
-						print ( x[field], value )
+						# print ( x[field], value )
 						finalData.append(x)
 
 			# finalData.extend(filteredDict)
 
 
 
-		print(finalData)
+		# print(finalData)
 		# return TempResult(finalData)
 		return finalData
 

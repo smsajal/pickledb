@@ -33,5 +33,5 @@ if __name__ == '__main__':
 	sourceFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/inputs/atomic_tester_data.json"
 	x=readJsonFile(sourceFile)
 	x.extend([{'name': 'd4', 'age': 40}])
-	print(x)
+	# print(x)
 	atomicWriteToFile(sourceFile,x)

@@ -8,7 +8,7 @@ class Database:
 
 	def createDbDirectory( self ):
 		dbPath=os.path.join(Var.databaseStorageFilePath,self.dbName)
-		print("creating directory: ",dbPath)
+		# print("creating directory: ",dbPath)
 		os.mkdir(path = dbPath)
 
 	def getDatabaseName( self ):
