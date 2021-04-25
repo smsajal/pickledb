@@ -277,7 +277,7 @@ def sum(tableName,dbName,field,limit=0):
     # print("Sum: ", sum)
     return sum
 
-def count(tableName,dbName,limit):
+def count(tableName,dbName,limit=0):
     '''
         args:
             tableName: Name of the table
