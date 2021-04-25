@@ -20,6 +20,6 @@ class FileTracker():
 
 
 if __name__ == '__main__':
-	x=FileTracker(fileTrackerPath = "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/databases/db1/table1/fileTracker.json")
+	x=FileTracker(fileTrackerPath = "/Users/rxh655/Documents/Spring\ 2021/CSE\ 541/Project/imdb_kaggle_small/title_principals/fileTracker.json ")
 	for y in x.getTrackerData():
 		print(y)
