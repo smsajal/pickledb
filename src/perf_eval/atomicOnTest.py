@@ -16,7 +16,7 @@ title_principals = TempResult (Table ( tableName = "title_principals", dbName = 
 
 def executeQuery(query):
 	a=datetime.datetime.now()
-	eval(query)
+	result=eval(query)
 	b=datetime.datetime.now()
 	duration=b-a
 	print(type(duration.microseconds))
