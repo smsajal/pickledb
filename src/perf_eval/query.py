@@ -6,9 +6,9 @@ def executeQuery(query):
 	print("=========== query: ",query)
 	cache.cache_checkQuery(query)
 	# result=eval(query)
-
+	# print("~~~~~~~~~~~ result type: ",type(result))
+	# print(result)
 	b=datetime.datetime.now()
 	duration=b-a
-	print ( "=========== query: ", query )
 	# print(type(duration.microseconds))
 	return duration.microseconds

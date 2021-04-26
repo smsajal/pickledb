@@ -96,7 +96,7 @@ class Table():
 		# step-2: handle already populated db case
 		else:
 
-			entryPlace=fTrackerData[0]
+			entryPlace={}
 			counter=0
 			for trackerData in fTrackerData:
 				if trackerData["keyStart"]<=data[self.primaryKey]:
