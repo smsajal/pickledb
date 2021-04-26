@@ -3,6 +3,8 @@ import src.interfaces.queryEngine as QueryEngine
 from lru import LRU
 
 cacheSize = 70
+writeThreshold = 50
+writeCache=[]
 cache=LRU(cacheSize)
 
 def cache_checkQuery(query):
@@ -23,18 +25,19 @@ def cacheRead(query):
     if cache.has_key(query):
         # print(cache[query])
         toReturn = cache[query]
-        # print("hit")
+        print("hit")
     else:
         cache[query] = eval(query)
         toReturn = eval(query)
-        # print("miss")
+        print("miss")
     # print("Print Return in cacheRead", toReturn)
     return toReturn
 
 def cacheWrite(query):
     # print("Query in cacheWrite: ", query)
     # print("Query Eval in cacheWrite: ", eval(query))
-    eval(query)
+    writeCache.append(query)
+    # eval(query)
     tableName = query.split("'")
     # print(tableName[1])
     for x in cache.keys():
@@ -42,7 +45,12 @@ def cacheWrite(query):
         # print(tableName_key[1])
         if tableName_key[1] == tableName[1]:
             del cache[x]
-            # print("deleted", x)
+            print("deleted", x)
+    if len(writeCache) == 50:
+        for x in writeCache:
+            eval(x)
+            print("evaluating: ", x)
+        writeCache.clear()
 
 def printCache():
     print(cache.items())
