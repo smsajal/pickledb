@@ -11,4 +11,5 @@ def executeQuery(query):
 	b=datetime.datetime.now()
 	duration=b-a
 	# print(type(duration.microseconds))
-	return duration.microseconds
+	durationNanoSeconds = duration.total_seconds() * 1000000000
+	return durationNanoSeconds
