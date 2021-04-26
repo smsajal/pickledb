@@ -3,7 +3,7 @@ import src.interfaces.queryEngine as QueryEngine
 from lru import LRU
 
 cacheSize = 70
-writeThreshold = 50
+writeThreshold = 3
 writeCache=[]
 cache=LRU(cacheSize)
 
@@ -38,7 +38,7 @@ def cacheWrite(query):
     # print("Query Eval in cacheWrite: ", eval(query))
     writeCache.append(query)
     # eval(query)
-    tableName = query.split("'")
+    tableName = query.split('"')
     # print(tableName[1])
     for x in cache.keys():
         tableName_key = x.split("'")
@@ -61,21 +61,21 @@ def test():
     # for i in range(cacheSize):
     #     cache[i] = str(i)
     # print(cache.items())
-    cache_checkQuery("QueryEngine.median('tablex', 'dbx','birthYear')")
-    cache_checkQuery("QueryEngine.mean('tablex', 'dbx','birthYear')")
-    cache_checkQuery("QueryEngine.mean('tablex', 'dbx','birthYear')")
-    cache_checkQuery("QueryEngine.mean('table2', 'db2','birthYear')")
-    cache_checkQuery("QueryEngine.bulkInsertTableJSON('tablex','dbx','nconst', '/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/JSONTest.json')")
-    cache_checkQuery("QueryEngine.bulkInsertTableJSON('table1','db2','nconst', '/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/JSONTest.json')")
-    cache_checkQuery("QueryEngine.bulkInsertTableJSON('table2','db2','nconst', '/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/JSONTest.json')")
-    cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
-    cache_checkQuery("QueryEngine.sum('title_principals', 'imdb_kaggle_small','ordering')")
-    cache_checkQuery("QueryEngine.median('title_principals', 'imdb_kaggle_small','ordering')")
-    cache_checkQuery("QueryEngine.median('imdb_ratings', 'imdb_kaggle_small','total_votes')")
-    cache_checkQuery("QueryEngine.mean('title_principals', 'imdb_kaggle_small','ordering')")
-    cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
-    cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
-    cache_checkQuery("QueryEngine.median('title_principals', 'imdb_kaggle_small','ordering')")
+    # cache_checkQuery("QueryEngine.median('tablex', 'dbx','birthYear')")
+    # cache_checkQuery("QueryEngine.mean('tablex', 'dbx','birthYear')")
+    # cache_checkQuery("QueryEngine.mean('tablex', 'dbx','birthYear')")
+    # cache_checkQuery("QueryEngine.mean('table2', 'db2','birthYear')")
+    # cache_checkQuery("QueryEngine.bulkInsertTableJSON('tablex','dbx','nconst', '/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/JSONTest.json')")
+    # cache_checkQuery("QueryEngine.bulkInsertTableJSON('table1','db2','nconst', '/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/JSONTest.json')")
+    # cache_checkQuery("QueryEngine.bulkInsertTableJSON('table2','db2','nconst', '/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/JSONTest.json')")
+    # cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
+    # cache_checkQuery("QueryEngine.sum('title_principals', 'imdb_kaggle_small','ordering')")
+    # cache_checkQuery("QueryEngine.median('title_principals', 'imdb_kaggle_small','ordering')")
+    # cache_checkQuery("QueryEngine.median('imdb_ratings', 'imdb_kaggle_small','total_votes')")
+    # cache_checkQuery("QueryEngine.mean('title_principals', 'imdb_kaggle_small','ordering')")
+    # cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
+    # cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
+    # cache_checkQuery("QueryEngine.median('title_principals', 'imdb_kaggle_small','ordering')")
     for x in writeCache:
         print(x)
     print(len(writeCache))
