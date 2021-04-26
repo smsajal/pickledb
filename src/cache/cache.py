@@ -2,7 +2,7 @@ from collections import OrderedDict
 import src.interfaces.queryEngine as QueryEngine
 from lru import LRU
 
-cacheSize = 5
+cacheSize = 70
 cache=LRU(cacheSize)
 
 def cache_checkQuery(query):
