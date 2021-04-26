@@ -3,7 +3,7 @@ import src.cache.cache as cache
 import src.interfaces.queryEngine as QueryEngine
 def executeQuery(query):
 	a=datetime.datetime.now()
-	# print("=========== query: ",query)
+	print("=========== query: ",query)
 	cache.cache_checkQuery(query)
 	# result=eval(query)
 	# print("~~~~~~~~~~~ result type: ",type(result))
