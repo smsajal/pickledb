@@ -3,7 +3,7 @@ import src.interfaces.queryEngine as QueryEngine
 from lru import LRU
 
 cacheSize = 70
-writeThreshold = 35
+writeThreshold = 5
 writeCache=[]
 cache=LRU(cacheSize)
 
