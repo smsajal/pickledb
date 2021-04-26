@@ -5,7 +5,7 @@ def executeQuery(query):
 	a=datetime.datetime.now()
 	print("=========== query: ",query)
 	cache.cache_checkQuery(query)
-	result=eval(query)
+	# result=eval(query)
 	# print("~~~~~~~~~~~ result type: ",type(result))
 	# print(result)
 	b=datetime.datetime.now()
