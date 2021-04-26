@@ -23,11 +23,11 @@ def cacheRead(query):
     if cache.has_key(query):
         # print(cache[query])
         toReturn = cache[query]
-        print("hit")
+        # print("hit")
     else:
         cache[query] = eval(query)
         toReturn = eval(query)
-        print("miss")
+        # print("miss")
     # print("Print Return in cacheRead", toReturn)
     return toReturn
 
@@ -42,7 +42,7 @@ def cacheWrite(query):
         # print(tableName_key[1])
         if tableName_key[1] == tableName[1]:
             del cache[x]
-            print("deleted", x)
+            # print("deleted", x)
 
 def printCache():
     print(cache.items())

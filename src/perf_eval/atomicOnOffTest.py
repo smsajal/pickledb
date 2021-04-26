@@ -11,9 +11,9 @@ from src.storage.tempResult import TempResult
 
 def atomicOnTest():
 
-	configFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/config.json"
+	configFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/atomicOnConfig.json"
 	workloadFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/tempWorkload.json"
-	latencyRecordFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/latencies.json"
+	latencyRecordFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/atomicOn_latencies.json"
 
 	configuration=FileUtility.readJsonFile(configFile)
 	queries=FileUtility.readJsonFile(workloadFile)
@@ -64,4 +64,7 @@ def atomicOnTest():
 
 
 if __name__ == '__main__':
-    atomicOnTest()
+	a = datetime.datetime.now()
+	atomicOnTest()
+	b = datetime.datetime.now()
+	print("total experiment duration: ", (b - a))
