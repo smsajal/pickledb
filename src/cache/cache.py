@@ -3,7 +3,7 @@ import src.interfaces.queryEngine as QueryEngine
 from lru import LRU
 
 cacheSize = 70
-writeThreshold = 3
+writeThreshold = 35
 writeCache=[]
 cache=LRU(cacheSize)
 
@@ -12,10 +12,10 @@ def cache_checkQuery(query):
     query_without_qe = chunks1[1]
     chunks2 = query_without_qe.split('(')
     if ((chunks2[0] == "tableInsert") or (chunks2[0] == "bulkInsertTable") or (chunks2[0] == "bulkInsertTableJSON")):
-        print("write")
+        # print("write")
         cacheWrite(query)
     else:
-        print("read")
+        # print("read")
         cacheRead(query)
 
 def cacheRead(query):
@@ -25,11 +25,11 @@ def cacheRead(query):
     if cache.has_key(query):
         # print(cache[query])
         toReturn = cache[query]
-        print("hit")
+        # print("hit")
     else:
         cache[query] = eval(query)
         toReturn = eval(query)
-        print("miss")
+        # print("miss")
     # print("Print Return in cacheRead", toReturn)
     return toReturn
 
@@ -45,12 +45,15 @@ def cacheWrite(query):
         # print(tableName_key[1])
         if tableName_key[1] == tableName[1]:
             del cache[x]
-            print("deleted", x)
+            # print("deleted", x)
     if len(writeCache) == writeThreshold:
-        for x in writeCache:
-            eval(x)
-            print("evaluating: ", x)
-        writeCache.clear()
+        runWriteCache
+
+def runWriteCache():
+    for x in writeCache:
+        eval(x)
+        # print("evaluating: ", x)
+    writeCache.clear()
 
 def printCache():
     print(cache.items())

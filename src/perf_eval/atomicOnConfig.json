@@ -1,16 +1,16 @@
 [
   {
     "readPercentage": 0.9,
-    "totalQueries": 5
+    "totalQueries": 100
   },
   {
 
   "readPercentage": 0.1,
-  "totalQueries": 5
+  "totalQueries": 100
   },
   {
 
   "readPercentage": 0.5,
-  "totalQueries": 5
+  "totalQueries": 100
   }
 ]
