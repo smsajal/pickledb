@@ -12,10 +12,10 @@ def cache_checkQuery(query):
     query_without_qe = chunks1[1]
     chunks2 = query_without_qe.split('(')
     if ((chunks2[0] == "tableInsert") or (chunks2[0] == "bulkInsertTable") or (chunks2[0] == "bulkInsertTableJSON")):
-        # print("write")
+        print("write")
         cacheWrite(query)
     else:
-        # print("read")
+        print("read")
         cacheRead(query)
 
 def cacheRead(query):
@@ -46,7 +46,7 @@ def cacheWrite(query):
         if tableName_key[1] == tableName[1]:
             del cache[x]
             print("deleted", x)
-    if len(writeCache) == 50:
+    if len(writeCache) == writeThreshold:
         for x in writeCache:
             eval(x)
             print("evaluating: ", x)
@@ -64,7 +64,10 @@ def test():
     cache_checkQuery("QueryEngine.median('tablex', 'dbx','birthYear')")
     cache_checkQuery("QueryEngine.mean('tablex', 'dbx','birthYear')")
     cache_checkQuery("QueryEngine.mean('tablex', 'dbx','birthYear')")
+    cache_checkQuery("QueryEngine.mean('table2', 'db2','birthYear')")
     cache_checkQuery("QueryEngine.bulkInsertTableJSON('tablex','dbx','nconst', '/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/JSONTest.json')")
+    cache_checkQuery("QueryEngine.bulkInsertTableJSON('table1','db2','nconst', '/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/JSONTest.json')")
+    cache_checkQuery("QueryEngine.bulkInsertTableJSON('table2','db2','nconst', '/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/JSONTest.json')")
     cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
     cache_checkQuery("QueryEngine.sum('title_principals', 'imdb_kaggle_small','ordering')")
     cache_checkQuery("QueryEngine.median('title_principals', 'imdb_kaggle_small','ordering')")
@@ -73,8 +76,10 @@ def test():
     cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
     cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
     cache_checkQuery("QueryEngine.median('title_principals', 'imdb_kaggle_small','ordering')")
-
-    printCache()
+    for x in writeCache:
+        print(x)
+    print(len(writeCache))
+    # printCache()
 
 if __name__ == "__main__":
     test()
