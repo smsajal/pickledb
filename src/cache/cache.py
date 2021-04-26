@@ -37,7 +37,6 @@ def cacheWrite(query):
     # print("Query in cacheWrite: ", query)
     # print("Query Eval in cacheWrite: ", eval(query))
     writeCache.append(query)
-    # eval(query)
     tableName = query.split('"')
     # print(tableName[1])
     for x in cache.keys():
@@ -47,7 +46,7 @@ def cacheWrite(query):
             del cache[x]
             # print("deleted", x)
     if len(writeCache) == writeThreshold:
-        runWriteCache
+        runWriteCache()
 
 def runWriteCache():
     for x in writeCache:
