@@ -44,6 +44,9 @@ def cacheWrite(query):
             del cache[x]
             print("deleted", x)
 
+def printCache():
+    print(cache.items())
+    print("Cache Length: ",cache.get_size())
 
 def test():
 
@@ -62,6 +65,8 @@ def test():
     cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
     cache_checkQuery("QueryEngine.mean('imdb_names', 'imdb_kaggle_small','height')")
     cache_checkQuery("QueryEngine.median('title_principals', 'imdb_kaggle_small','ordering')")
+
+    printCache()
 
 if __name__ == "__main__":
     test()
