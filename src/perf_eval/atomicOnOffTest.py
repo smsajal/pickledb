@@ -5,7 +5,7 @@ import numpy as np
 import datetime
 import src.storage.fileUtility as FileUtility
 from src.perf_eval.query import executeQuery
-import src.cache.cache as cache
+import src.cache.caheDict as cache
 import src.interfaces.queryEngine as QueryEngine
 from src.storage.table import Table
 from src.storage.tempResult import TempResult

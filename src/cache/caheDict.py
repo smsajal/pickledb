@@ -2,6 +2,8 @@ import src.interfaces.queryEngine as QueryEngine
 
 cacheSize = 70
 cache = {}
+writeThreshold = 5
+writeCache=[]
 
 def cache_checkQuery(query):
     chunks1 = query.split('.')
@@ -40,6 +42,7 @@ def cacheWrite(query):
     # print("Query in cacheWrite: ", query)
     # print("Query Eval in cacheWrite: ", eval(query))
     eval(query)
+    writeCache.append(query)
     tableName = query.split('"')
     # print(tableName[1])
     for x in list(cache.keys()):
@@ -48,6 +51,14 @@ def cacheWrite(query):
         if tableName_key[1] == tableName[1]:
             # print("deleted", x)
             cache.pop(x)
+    if len(writeCache) == writeThreshold:
+        runWriteCache()
+
+def runWriteCache():
+    for x in writeCache:
+        eval(x)
+        # print("evaluating: ", x)
+    writeCache.clear()
 
 def printCache():
     print(cache)
