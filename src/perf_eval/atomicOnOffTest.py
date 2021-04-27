@@ -59,11 +59,8 @@ def atomicOnTest():
 				writeIndex+=1
 			latency.append(executeQuery(query))
 
-<<<<<<< HEAD
-
-=======
 		cache.cache.clear()
->>>>>>> 22f67832c8c8ef5d3c2556f37349b20b92a6416d
+
 
 		expCount+=1
 		latencies[str(expCount)]=latency
