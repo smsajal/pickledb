@@ -1,0 +1,17 @@
+{
+  "joinMergeQueries":[
+    "QueryEngine.sortedMergeJoin('imdb_kaggle_small','imdb_movies','imdb_ratings','imdb_title_id')",
+    "QueryEngine.sortedMergeJoin('imdb_kaggle_small','imdb_movies','title_principals','imdb_title_id')",
+    "QueryEngine.sortedMergeJoin('imdb_kaggle_small','imdb_names,'title_principals','imdb_name_id')",
+  ],
+  "joinHashQueries":[
+    "QueryEngine.hashJoin('imdb_kaggle_small','imdb_movies','imdb_ratings','imdb_title_id')",
+    "QueryEngine.hashJoin('imdb_kaggle_small','imdb_movies','title_principals','imdb_title_id')",
+    "QueryEngine.hashJoin('imdb_kaggle_small','imdb_names,'title_principals','imdb_name_id')",
+  ],
+  "joinLoopQueries":[
+    "QueryEngine.nestedLoopJoin('imdb_kaggle_small','imdb_movies','imdb_ratings','imdb_title_id')",
+    "QueryEngine.nestedLoopJoin('imdb_kaggle_small','imdb_movies','title_principals','imdb_title_id')",
+    "QueryEngine.nestedLoopJoin('imdb_kaggle_small','imdb_names,'title_principals','imdb_name_id')",
+  ]
+}
