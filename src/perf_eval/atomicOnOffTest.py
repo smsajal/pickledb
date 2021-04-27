@@ -13,9 +13,9 @@ from src.storage.tempResult import TempResult
 
 def atomicOnTest():
 
-	configFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/atomicOnConfig.json"
-	workloadFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/tempWorkload.json"
-	latencyRecordFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/atomicON_cache_latencies_AV.json"
+	configFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/atomicOnConfig.json"
+	workloadFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/tempWorkload.json"
+	latencyRecordFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/atomicOFF_cache_latencies.json"
 
 	configuration=FileUtility.readJsonFile(configFile)
 	queries=FileUtility.readJsonFile(workloadFile)

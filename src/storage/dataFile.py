@@ -12,8 +12,8 @@ class DataFile():
 	def updateTableData( self,data ):
 		self.data=data
 		# print("self.data: ",self.data)
-		# with open(self.dataFilePath,"w") as json_file:
-		# 	json.dump(self.data,json_file)
-		FileUtility.atomicWriteToFile(filePath = self.dataFilePath,data = self.data)
+		with open(self.dataFilePath,"w") as json_file:
+			json.dump(self.data,json_file)
+		# FileUtility.atomicWriteToFile(filePath = self.dataFilePath,data = self.data)
 		return
 
