@@ -103,7 +103,7 @@ class TempResult():
 		if field is None:
 			print("invalid field name")
 			return
-		dataPoints=[float(x[field]) for x in self.data]
+		dataPoints=[float(x[field]) if x[field]!="" else 0 for x in self.data]
 		return statistics.median(dataPoints)
 
 	def min( self,field=None ):
@@ -111,7 +111,7 @@ class TempResult():
 			print("invalid field name")
 			return
 
-		return min([float(x[field]) for x in self.data])
+		return min([float(x[field]) if x[field]!="" else 0 for x in self.data])
 
 
 	def max( self,field=None ):
@@ -119,14 +119,14 @@ class TempResult():
 			print("invalid field name")
 			return
 
-		return max([float(x[field]) for x in self.data])
+		return max([float(x[field]) if x[field]!="" else 0 for x in self.data])
 
 	def stdDev( self,field=None ):
 		if field is None:
 			print("invalid field name")
 			return
 
-		return statistics.stdev([float(x[field]) for x in self.data])
+		return statistics.stdev([float(x[field]) if x[field]!="" else 0 for x in self.data])
 
 	def count( self ):
 		return len(self.data)
@@ -136,7 +136,7 @@ class TempResult():
 			print("invalid field name")
 			return
 
-		return sum( float(x[field ]) for x in  self.data)
+		return sum( float(x[field ]) if x[field]!="" else 0 for x in  self.data)
 	def print( self ):
 		print("------------------------------------")
 		for x in self.data:

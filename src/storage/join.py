@@ -16,13 +16,13 @@ def nestedLoopJoin(tempResult1, joinField1, tempResult2, joinField2):
 	for row1 in tempResult1.getData():
 		for row2 in tempResult2.getData():
 			if row1[joinField1] == row2[joinField2]:
-				print("row1: ",row1)
-				print("row2: ",row2)
+				# print("row1: ",row1)
+				# print("row2: ",row2)
 				row1.update ( row2 )
 				data.append(row1)
 
-	print("---------- data size: ",len(data))
-	print("--------- data[0]: ",data[0])
+	# print("---------- data size: ",len(data))
+	# print("--------- data[0]: ",data[0])
 	return TempResult(data = data)
 
 
@@ -85,16 +85,16 @@ def test():
 
 	# nested loop join demo
 	nestedLoopResult=nestedLoopJoin(tempResult1 = movies,joinField1 = "imdb_title_id",tempResult2 = titlePrincipals,joinField2 = "imdb_title_id")
-	nestedLoopResult.print()
+	# nestedLoopResult.print()
 
 
 	# hash join demo
 	hashJoinResult=hashJoin(tempResult1 = movies,joinField1 = "imdb_title_id",tempResult2 = titlePrincipals,joinField2 = "imdb_title_id")
-	hashJoinResult.print()
+	# hashJoinResult.print()
 
 	# sort merge join demo
 	sortMergeResult=sortedMergeJoin(tempResult1 = movies,joinField1 = "imdb_title_id",tempResult2 = titlePrincipals,joinField2 = "imdb_title_id")
-	sortMergeResult.print()
+	# sortMergeResult.print()
 
 
 	end=datetime.datetime.now()

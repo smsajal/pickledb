@@ -52,8 +52,8 @@ def insert(table,data):
 			None
 	'''
 
-	print("---------- data type: ",type(data))
-	print("------------ occupancyCount type: ",type(StorageVariables.singleInsertOccupancyCount))
+	# print("---------- data type: ",type(data))
+	# print("------------ occupancyCount type: ",type(StorageVariables.singleInsertOccupancyCount))
 	table.insert(data,StorageVariables.singleInsertOccupancyCount)
 	return
 

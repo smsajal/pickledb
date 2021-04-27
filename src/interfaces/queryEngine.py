@@ -1,6 +1,6 @@
 import src.interfaces.storageInterface as storageInterface
 from src.storage.table import Table as dbTable
-from src.storage.tempResult import TempResult as result
+from src.storage.tempResult import TempResult as result, TempResult
 import src.storage.join as join
 import json
 
@@ -82,7 +82,7 @@ def tableInsert(tableName,dbName,primaryKey,data):
     print("Single Tuple Insert Completed Successfully!")
 
 
-def simpleSelect(tableName,dbName,primaryKey,fields):
+def simpleSelect(tableName,dbName,primaryKey,fields=None):
     '''
         args:
             tableName: Name of the table
@@ -95,9 +95,19 @@ def simpleSelect(tableName,dbName,primaryKey,fields):
             FROM table_name;
     '''
     tableObj = dbTable(tableName=tableName, dbName=dbName, primaryKey=primaryKey)
-    fields_list = list(fields.split(","))
-    print("Select Values are as follows: ")
-    tableObj.vanillaSelect(fields_list)
+
+    if not (fields is None):
+        fields_list = list(fields.split(","))
+        # print("Select Values are as follows: ")
+        x = TempResult(tableObj.vanillaSelect(fields_list))
+        # x.print()
+        toReturn = x.data
+    else:
+        x = TempResult(tableObj.vanillaSelect())
+        # x.print()
+        toReturn = x.data
+    return toReturn
+
 
 def sample(tableName,dbName,sampleSize):
     '''
@@ -109,7 +119,9 @@ def sample(tableName,dbName,sampleSize):
     if sampleSize > 0:
         tableObj = dbTable(tableName=tableName, dbName=dbName)
         sampleResult = result(tableObj.vanillaSelect()).sample(sampleSize)
-        print("Sample Result Length: ", len(sampleResult.data))
+        # print(sampleResult.data)
+        # print("Sample Result Length: ", len(sampleResult.data))
+        return sampleResult.data
 
 def limitResult(tableName,dbName,limit):
     '''
@@ -121,9 +133,11 @@ def limitResult(tableName,dbName,limit):
     if limit > 0:
         tableObj = dbTable(tableName=tableName, dbName=dbName)
         limitResult = result(tableObj.vanillaSelect()).limit(limit)
-        print("Limit Result length: ", len(limitResult.data))
+        # print(limitResult.data)
+        # print("Limit Result length: ", len(limitResult.data))
+        return limitResult.data
 
-def orderBy(tableName,dbName,field,limit):
+def orderBy(tableName,dbName,field,limit=0):
     '''
         args:
             tableName: Name of the table
@@ -140,9 +154,13 @@ def orderBy(tableName,dbName,field,limit):
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
 
     orderResult = selectResult.orderBy(field=field)
-    print("Order Result Length: ", len(orderResult.data))
+    # print(orderResult.data)
+    # print("Order Result Length: ", len(orderResult.data))
+    return orderResult.data
 
-def mean(tableName,dbName,field,limit):
+# mean(limitCount=100)
+# limit(limitCount=100).mean()
+def mean(tableName,dbName,field,limit=0):
     '''
         args:
             tableName: Name of the table
@@ -159,9 +177,10 @@ def mean(tableName,dbName,field,limit):
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
 
     meanResult = selectResult.mean(field=field)
-    print("Mean: ", meanResult)
+    # print("Mean: ", meanResult)
+    return meanResult
 
-def median(tableName,dbName,field,limit):
+def median(tableName,dbName,field,limit=0):
     '''
         args:
             tableName: Name of the table
@@ -177,10 +196,11 @@ def median(tableName,dbName,field,limit):
     else:
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
 
-    meanResult = selectResult.median(field=field)
-    print("Median: ", meanResult)
+    medianResult = selectResult.median(field=field)
+    # print("Median: ", medianResult)
+    return medianResult
 
-def min(tableName,dbName,field,limit):
+def min(tableName,dbName,field,limit=0):
     '''
         args:
             tableName: Name of the table
@@ -195,10 +215,11 @@ def min(tableName,dbName,field,limit):
 
     else:
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
-    meanResult = selectResult.min(field=field)
-    print("Min: ", meanResult)
+    min = selectResult.min(field=field)
+    # print("Min: ", min)
+    return min
 
-def max(tableName,dbName,field,limit):
+def max(tableName,dbName,field,limit=0):
     '''
         args:
             tableName: Name of the table
@@ -214,10 +235,11 @@ def max(tableName,dbName,field,limit):
     else:
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
 
-    meanResult = selectResult.max(field=field)
-    print("Max: ", meanResult)
+    max = selectResult.max(field=field)
+    # print("Max: ", max)
+    return max
 
-def stdDev(tableName,dbName,field,limit):
+def stdDev(tableName,dbName,field,limit=0):
     '''
         args:
             tableName: Name of the table
@@ -232,10 +254,11 @@ def stdDev(tableName,dbName,field,limit):
 
     else:
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
-    meanResult = selectResult.stdDev(field=field)
-    print("Standard Dev: ", meanResult)
+    stddev = selectResult.stdDev(field=field)
+    # print("Standard Dev: ", stddev)
+    return stddev
 
-def sum(tableName,dbName,field,limit):
+def sum(tableName,dbName,field,limit=0):
     '''
         args:
             tableName: Name of the table
@@ -250,10 +273,11 @@ def sum(tableName,dbName,field,limit):
 
     else:
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
-    meanResult = selectResult.sum(field=field)
-    print("Sum: ", meanResult)
+    sum = selectResult.sum(field=field)
+    # print("Sum: ", sum)
+    return sum
 
-def count(tableName,dbName,limit):
+def count(tableName,dbName,limit=0):
     '''
         args:
             tableName: Name of the table
@@ -268,9 +292,10 @@ def count(tableName,dbName,limit):
     else:
         selectResult = result(tableObj.vanillaSelect()).limit(limit)
     count = selectResult.count()
-    print("count: ",count)
+    # print("count: ",count)
+    return count
 
-def nestedLoopJoin(dbName,table1,table2,commonField,commonLimit):
+def nestedLoopJoin(dbName,table1,table2,commonField,commonLimit=0):
     '''
         args:
             dbName: Name of the database
@@ -289,9 +314,10 @@ def nestedLoopJoin(dbName,table1,table2,commonField,commonLimit):
         TableSet2 = result(tableObj2.vanillaSelect()).limit(commonLimit)
     nestedLoopResult = join.nestedLoopJoin(tempResult1=TableSet1, joinField1=commonField, tempResult2=TableSet2, joinField2=commonField)
     nestedLoopResult.print()
-    print("Size of Nested Loop Join Result: ", len(nestedLoopResult.data))
+    # print("Size of Nested Loop Join Result: ", len(nestedLoopResult.data))
+    return nestedLoopResult.data
 
-def hashJoin(dbName,table1,table2,commonField,commonLimit):
+def hashJoin(dbName,table1,table2,commonField,commonLimit=0):
     '''
         args:
             dbName: Name of the database
@@ -309,10 +335,12 @@ def hashJoin(dbName,table1,table2,commonField,commonLimit):
         TableSet1 = result(tableObj1.vanillaSelect()).limit(commonLimit)
         TableSet2 = result(tableObj2.vanillaSelect()).limit(commonLimit)
     hashJoinResult = join.hashJoin(tempResult1=TableSet1, joinField1=commonField, tempResult2=TableSet2, joinField2=commonField)
-    hashJoinResult.print()
-    print("Size of Hash Join Result: ", len(hashJoinResult.data))
+    # hashJoinResult.print()
+    # print(hashJoinResult.data)
+    # print("Size of Hash Join Result: ", len(hashJoinResult.data))
+    return hashJoinResult.data
 
-def sortedMergeJoin(dbName,table1,table2,commonField,commonLimit):
+def sortedMergeJoin(dbName,table1,table2,commonField,commonLimit=0):
     '''
         args:
             dbName: Name of the database
@@ -330,8 +358,9 @@ def sortedMergeJoin(dbName,table1,table2,commonField,commonLimit):
         TableSet1 = result(tableObj1.vanillaSelect()).limit(commonLimit)
         TableSet2 = result(tableObj2.vanillaSelect()).limit(commonLimit)
     sortMergeResult = join.sortedMergeJoin(tempResult1=TableSet1, joinField1=commonField, tempResult2=TableSet2, joinField2=commonField)
-    sortMergeResult.print()
-    print("Size of Sort Merge Join Result: ", len(sortMergeResult.data))
+    # sortMergeResult.print()
+    # print("Size of Sort Merge Join Result: ", len(sortMergeResult.data))
+    return sortMergeResult.data
 
 
 
@@ -486,41 +515,43 @@ def main():
         choice = interface()
         interfaceCalls(choice)
 
+    # simpleSelect(tableName = "tablex", dbName = "dbx", primaryKey = "nconst")
+
     # limitResult(tableName = "imdb_movies", dbName = "imdb_kaggle_small", limit = 5)
     #
-    # orderBy(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "country", limit = "")
+    # orderBy(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "country")
     # orderBy(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "title", limit = 5)
     #
     # sample(tableName = "imdb_movies", dbName = "imdb_kaggle_small", sampleSize = 5)
     #
-    # mean(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = "")
+    # mean(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration")
     # mean(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 5)
     #
-    # median(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = "")
+    # median(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 0)
     # median(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 5)
     #
-    # min(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = "")
+    # min(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 0)
     # min(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 5)
     #
-    # max(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = "")
+    # max(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 0)
     # max(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 5)
     #
-    # stdDev(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = "")
+    # stdDev(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 0)
     # stdDev(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 5)
     #
-    # sum(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = "")
+    # sum(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 0)
     # sum(tableName = "imdb_movies", dbName = "imdb_kaggle_small", field = "duration", limit = 5)
     #
-    # count(tableName = "imdb_movies", dbName = "imdb_kaggle_small", limit="")
+    # count(tableName = "imdb_movies", dbName = "imdb_kaggle_small", limit= 0)
     # count(tableName="imdb_movies", dbName="imdb_kaggle_small", limit=5)
     #
-    # nestedLoopJoin(dbName="imdb_kaggle_small", table1="imdb_movies", table2="imdb_ratings", commonField="imdb_title_id", commonLimit="")
+    # nestedLoopJoin(dbName="imdb_kaggle_small", table1="imdb_movies", table2="imdb_ratings", commonField="imdb_title_id", commonLimit= 0)
     # nestedLoopJoin(dbName="imdb_kaggle_small", table1="imdb_movies", table2="imdb_ratings", commonField="imdb_title_id", commonLimit=5)
     #
-    # hashJoin(dbName="imdb_kaggle_small", table1="imdb_movies", table2="imdb_ratings", commonField="imdb_title_id", commonLimit="")
+    # hashJoin(dbName="imdb_kaggle_small", table1="imdb_movies", table2="imdb_ratings", commonField="imdb_title_id", commonLimit= 0)
     # hashJoin(dbName="imdb_kaggle_small", table1="imdb_movies", table2="imdb_ratings", commonField="imdb_title_id", commonLimit=5)
     #
-    # sortedMergeJoin(dbName="imdb_kaggle_small", table1="imdb_movies", table2="imdb_ratings", commonField="imdb_title_id", commonLimit="")
+    # sortedMergeJoin(dbName="imdb_kaggle_small", table1="imdb_movies", table2="imdb_ratings", commonField="imdb_title_id", commonLimit= 0)
     # sortedMergeJoin(dbName="imdb_kaggle_small", table1="imdb_movies", table2="imdb_ratings", commonField="imdb_title_id", commonLimit=5)
     #
 
