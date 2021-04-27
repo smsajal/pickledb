@@ -41,7 +41,7 @@ def cacheRead(query):
 def cacheWrite(query):
     # print("Query in cacheWrite: ", query)
     # print("Query Eval in cacheWrite: ", eval(query))
-    eval(query)
+    # eval(query)
     writeCache.append(query)
     tableName = query.split('"')
     # print(tableName[1])
