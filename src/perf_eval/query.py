@@ -1,5 +1,5 @@
 import datetime
-import src.cache.caheDict as cache
+import src.cache.cache as cache
 import src.interfaces.queryEngine as QueryEngine
 def executeQuery(query):
 	a=datetime.datetime.now()
@@ -11,5 +11,5 @@ def executeQuery(query):
 	b=datetime.datetime.now()
 	duration=b-a
 	# print(type(duration.microseconds))
-	durationNanoSeconds=duration.total_seconds()*1000000000
+	durationNanoSeconds = duration.total_seconds() * 1000000000
 	return durationNanoSeconds
