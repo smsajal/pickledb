@@ -5,7 +5,8 @@ import numpy as np
 import datetime
 import src.storage.fileUtility as FileUtility
 from src.perf_eval.query import executeQuery
-import src.cache.cache as cache
+import src.cache.caheDict as cache
+# import src.cache.cache as cache
 import src.interfaces.queryEngine as QueryEngine
 from src.storage.table import Table
 from src.storage.tempResult import TempResult
@@ -14,7 +15,7 @@ def atomicOnTest():
 
 	configFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/atomicOnConfig.json"
 	workloadFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/tempWorkload.json"
-	latencyRecordFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/atomicOn_latencies.json"
+	latencyRecordFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/atomicON_cache_latencies_AV.json"
 
 	configuration=FileUtility.readJsonFile(configFile)
 	queries=FileUtility.readJsonFile(workloadFile)
@@ -27,6 +28,7 @@ def atomicOnTest():
 	expCount=0
 
 	for config in configuration:
+
 
 		totalQueriesCount=config["totalQueries"]
 		readPercentage=config["readPercentage"]
