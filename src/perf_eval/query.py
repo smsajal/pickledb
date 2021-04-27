@@ -1,5 +1,5 @@
 import datetime
-import src.cache.cache as cache
+import src.cache.caheDict as cache
 import src.interfaces.queryEngine as QueryEngine
 def executeQuery(query):
 	a=datetime.datetime.now()
