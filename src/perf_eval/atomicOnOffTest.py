@@ -5,6 +5,7 @@ import numpy as np
 import datetime
 import src.storage.fileUtility as FileUtility
 from src.perf_eval.query import executeQuery
+import src.cache.cache as cache
 import src.interfaces.queryEngine as QueryEngine
 from src.storage.table import Table
 from src.storage.tempResult import TempResult
@@ -26,6 +27,7 @@ def atomicOnTest():
 	expCount=0
 
 	for config in configuration:
+
 
 		totalQueriesCount=config["totalQueries"]
 		readPercentage=config["readPercentage"]
@@ -57,7 +59,11 @@ def atomicOnTest():
 				writeIndex+=1
 			latency.append(executeQuery(query))
 
+<<<<<<< HEAD
 
+=======
+		cache.cache.clear()
+>>>>>>> 22f67832c8c8ef5d3c2556f37349b20b92a6416d
 
 		expCount+=1
 		latencies[str(expCount)]=latency

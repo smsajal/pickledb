@@ -13,3 +13,4 @@ def executeQuery(query):
 	# print(type(duration.microseconds))
 	durationNanoSeconds=duration.total_seconds()*1000000000
 	return durationNanoSeconds
+
