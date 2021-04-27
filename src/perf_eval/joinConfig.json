@@ -1,0 +1,14 @@
+[
+  {
+    "queryType": "joinMergeQueries",
+    "totalQueries": 50
+  },
+  {
+    "queryType": "joinHashQueries",
+    "totalQueries": 50
+  },
+  {
+    "queryType": "joinLoopQueries",
+    "totalQueries": 5
+  }
+]
