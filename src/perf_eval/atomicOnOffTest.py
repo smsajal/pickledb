@@ -14,7 +14,7 @@ def atomicOnTest():
 
 	configFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/atomicOnConfig.json"
 	workloadFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/tempWorkload.json"
-	latencyRecordFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/atomicOn_writeBack_latencies.json"
+	latencyRecordFile="/Users/sxs2561/Documents/AcademicAssignments/cse_541/pickledb/src/perf_eval/atomicOff_writeBack_latencies.json"
 
 	configuration=FileUtility.readJsonFile(configFile)
 	queries=FileUtility.readJsonFile(workloadFile)
