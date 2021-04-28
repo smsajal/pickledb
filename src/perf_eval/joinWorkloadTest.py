@@ -6,12 +6,13 @@ import datetime
 import src.storage.fileUtility as FileUtility
 from src.perf_eval.query import executeQuery
 import src.interfaces.queryEngine as QueryEngine
+import src.cache.caheDict as cache
 
 def joinTest():
 
 	configFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinConfig.json"
 	workloadFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinWorkload.json"
-	latencyRecordFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinLatency.json"
+	latencyRecordFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinLatency500.json"
 
 
 	configuration=FileUtility.readJsonFile(configFile)
@@ -39,8 +40,10 @@ def joinTest():
 		for query in joinQueriesToRun:
 			latency.append(executeQuery(query))
 
+		cache.cache.clear()
 		expCount+=1
 		latencies[str(expCount)]=latency
+
 
 	FileUtility.writeToJsonFile(latencyRecordFile,data=latencies)
 

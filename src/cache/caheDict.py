@@ -1,18 +1,27 @@
 import src.interfaces.queryEngine as QueryEngine
+from src.storage.table import Table
+from src.storage.tempResult import TempResult
+from src.storage.join import sortedMergeJoin, hashJoin, nestedLoopJoin
+
+movies = TempResult(Table(tableName="imdb_movies", dbName="imdb_kaggle_small").vanillaSelect())
+names = TempResult(Table(tableName="imdb_names", dbName="imdb_kaggle_small").vanillaSelect())
+ratings = TempResult(Table(tableName="imdb_ratings", dbName="imdb_kaggle_small").vanillaSelect())
+title_principals = TempResult(Table(tableName="title_principals", dbName="imdb_kaggle_small").vanillaSelect())
+
 
 cacheSize = 70
 cache = {}
 
 def cache_checkQuery(query):
-    chunks1 = query.split('.')
-    query_without_qe = chunks1[1]
-    chunks2 = query_without_qe.split('(')
-    if ((chunks2[0] == "tableInsert") or (chunks2[0] == "bulkInsertTable") or (chunks2[0] == "bulkInsertTableJSON")):
-        # print("write")
-        cacheWrite(query)
-    else:
-        # print("read")
-        cacheRead(query)
+    # chunks1 = query.split('.')
+    # query_without_qe = chunks1[1]
+    # chunks2 = query_without_qe.split('(')
+    # if ((chunks2[0] == "tableInsert") or (chunks2[0] == "bulkInsertTable") or (chunks2[0] == "bulkInsertTableJSON")):
+    #     # print("write")
+    #     cacheWrite(query)
+    # else:
+    # print("read")
+    cacheRead(query)
 
 def cacheRead(query):
     # print("Query in cacheRead: ",query)

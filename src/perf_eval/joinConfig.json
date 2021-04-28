@@ -1,14 +1,14 @@
 [
   {
     "queryType": "joinMergeQueries",
-    "totalQueries": 50
+    "totalQueries": 500
   },
   {
     "queryType": "joinHashQueries",
-    "totalQueries": 50
+    "totalQueries": 500
   },
   {
     "queryType": "joinLoopQueries",
-    "totalQueries": 5
+    "totalQueries": 500
   }
 ]
