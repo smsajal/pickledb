@@ -1,4 +1,5 @@
 import datetime
+import src.cache.caheDict as cache
 import src.interfaces.queryEngine as QueryEngine
 from src.storage.table import Table
 from src.storage.tempResult import TempResult
@@ -11,12 +12,14 @@ title_principals = TempResult(Table(tableName="title_principals", dbName="imdb_k
 
 def executeQuery(query):
 	a=datetime.datetime.now()
-
-	result=eval(query)
+	print("=========== query: ",query)
+	cache.cache_checkQuery(query)
+	# result=eval(query)
 	# print("~~~~~~~~~~~ result type: ",type(result))
 	# print(result)
 	b=datetime.datetime.now()
 	duration=b-a
-	print ( "=========== query: ", query )
 	# print(type(duration.microseconds))
-	return duration.microseconds
+	durationNanoSeconds=duration.total_seconds()*1000000000
+	return durationNanoSeconds
+

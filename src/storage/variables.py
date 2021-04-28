@@ -1,4 +1,5 @@
 # database config
+
 # databaseStorageFilePath="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/databases/"
 databaseStorageFilePath="/Users/rxh655/Documents/Spring 2021/CSE 541/Project/"
 

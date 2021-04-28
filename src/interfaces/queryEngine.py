@@ -44,7 +44,7 @@ def bulkInsertTable(tableName, dbName, primaryKey, bulkData):
     '''
     tableObj = dbTable(tableName=tableName, dbName=dbName, primaryKey=primaryKey)
     storageInterface.bulkInsert(tableObj,bulkData)
-    print("Bulk Insert Completed Successfully!")
+    # print("Bulk Insert Completed Successfully!")
 
 def bulkInsertTableJSON(tableName, dbName, primaryKey, bulkDataJSONpath):
     '''
@@ -63,7 +63,7 @@ def bulkInsertTableJSON(tableName, dbName, primaryKey, bulkDataJSONpath):
     file = open(bulkDataJSONpath)
     bulkDataList = json.load(file)
     storageInterface.bulkInsert(tableObj, bulkDataList)
-    print("Bulk Insert Completed Successfully!")
+    # print("Bulk Insert Completed Successfully!")
 
 def tableInsert(tableName,dbName,primaryKey,data):
     '''
@@ -79,7 +79,7 @@ def tableInsert(tableName,dbName,primaryKey,data):
     '''
     tableObj = dbTable(tableName=tableName, dbName=dbName, primaryKey=primaryKey)
     storageInterface.insert(tableObj,data)
-    print("Single Tuple Insert Completed Successfully!")
+    # print("Single Tuple Insert Completed Successfully!")
 
 
 def simpleSelect(tableName,dbName,primaryKey,fields=None):
