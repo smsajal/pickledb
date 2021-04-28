@@ -15,7 +15,7 @@ def atomicOnTest():
 
 	configFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/atomicOnConfig.json"
 	workloadFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/tempWorkload.json"
-	latencyRecordFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/atomicON_cache_latencies_AV.json"
+	latencyRecordFile="/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/atomicON_cache_latencies_100.json"
 
 	configuration=FileUtility.readJsonFile(configFile)
 	queries=FileUtility.readJsonFile(workloadFile)
