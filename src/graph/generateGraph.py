@@ -27,6 +27,7 @@ def makeGraphAtomic(data1, data2, outfilename):
     plt.legend()
     # plt.show()
     plt.savefig(outfilename)
+    plt.clf()
 
 '''data1= cache absent, data2= cache present'''
 def makeGraphCache(data1, data2, outfilename):
@@ -42,6 +43,7 @@ def makeGraphCache(data1, data2, outfilename):
     plt.legend()
     # plt.show()
     plt.savefig(outfilename)
+    plt.clf()
 
 '''data1= base implementation, data2= writeback'''
 def makeGraphWB(data1, data2, outfilename):
@@ -57,6 +59,7 @@ def makeGraphWB(data1, data2, outfilename):
     plt.legend()
     # plt.show()
     plt.savefig(outfilename)
+    plt.clf()
 
 '''data1 = sort-merge, data2=hash join, data3= inner loop'''
 def makeGraphJoin(data1, data2, data3, outfilename):
@@ -74,12 +77,20 @@ def makeGraphJoin(data1, data2, data3, outfilename):
     plt.legend()
     # plt.show()
     plt.savefig(outfilename)
+    plt.clf()
 
 if __name__ == '__main__':
-    file1 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/data/atomicOff_nonCache_latencies.json"
-    file2 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/data/atomicOn_nonCache_latencies.json"
-    workload = 3
-    data1 = readData(file1, str(workload))
-    data2 = readData(file2, str(workload))
-    makeGraphAtomic(data1=data1, data2=data2, outfilename='graph/atomic_workload' + str(workload) + '.png')
+    file1 = "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/results/atomicOff_nonCache_latencies.json"
+    file2 = "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/results/atomicOn_nonCache_latencies.json"
+
+
+    # makeGraphAtomic(data1=data1, data2=data2, outfilename='graph/atomicOnOff_noncache_workload' + str(workload) + '.png')
     # makeGraphJoin(data1=data1, data2=data2, data3=data2, outfilename='graph/joinTest' + str(workload) + '.png')
+    for i in range(1, 4):
+        print(i)
+        workload = i
+        data1 = readData ( file1, str ( workload ) )
+        data2 = readData ( file2, str ( workload ) )
+        # makeGraphCache(data1=data1, data2=data2, outfilename='graph/cacheOnOff_atomicOn_workload' + str(workload) + '.png')
+        makeGraphAtomic ( data1 = data1, data2 = data2, outfilename = 'graph/atomicOnOff_noncache_workload' + str ( workload ) + '.png' )
+        # makeGraphWB ( data1 = data1, data2 = data2, outfilename = 'graph/cacheWB_atomicOn_workload' + str ( workload ) + '.png' )
