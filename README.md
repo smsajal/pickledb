@@ -1,32 +1,32 @@
 **Branch work1:**
 
-This branch demonstrates our extended version of pickled in the form of an interaction between front end Query Engine and the storage system without any cache implementation.
+This branch demonstrates our extended version of pickled in the form of an interaction between front end Query Engine and the storage system **without any cache** implementation.
 
 **Folder Structure:**
 
 PICKLEDB
 
-1. src
+src
 
-2. cache: FIFO cache code
+1. cache: FIFO cache code
 
-3. graph: graphs generated from the workloads
+2. graph: graphs generated from the workloads
 
-4. interface: interface code
+3. interface: interface code
 
         queryEngine.py
 
-5. perf\_eval: performance evaluation code
+4. perf\_eval: performance evaluation code
 
         atomicOnOffTest.py
 
-6. picklesrc: original pickled code base
+5. picklesrc: original pickled code base
 
-7. storage: backend storage code
+6. storage: backend storage code
 
         variable.py
 
-**To run the code from this branch:**
+**Configure Paths to run the code from this branch:**
 
 1. In variable.py - Change the &#39;databaseStorageFilePath&#39; to an appropriate file path.
 2. In atomicOnOffTest.py - Change the &#39;configFile&#39; to a json file where the configuration for the workload is present.
