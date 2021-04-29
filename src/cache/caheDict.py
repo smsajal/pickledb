@@ -13,14 +13,7 @@ cacheSize = 70
 cache = {}
 
 def cache_checkQuery(query):
-    # chunks1 = query.split('.')
-    # query_without_qe = chunks1[1]
-    # chunks2 = query_without_qe.split('(')
-    # if ((chunks2[0] == "tableInsert") or (chunks2[0] == "bulkInsertTable") or (chunks2[0] == "bulkInsertTableJSON")):
-    #     # print("write")
-    #     cacheWrite(query)
-    # else:
-    # print("read")
+
     cacheRead(query)
 
 def cacheRead(query):
