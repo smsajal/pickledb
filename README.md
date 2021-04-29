@@ -1,46 +1,39 @@
-![Download badge](http://pepy.tech/badge/pickledb)
+**Branch work1:**
 
-# pickleDB
-pickleDB is lightweight, fast, and simple database based on the
-[json](https://docs.python.org/3/library/json.html) module.
-And it's BSD licensed!
+This branch demonstrates our extended version of pickled in the form of an interaction between front end Query Engine and the storage system **without any cache** implementation.
 
+**Folder Structure:**
 
-## pickleDB is Fun
-```python
->>> import pickledb
+PICKLEDB
 
->>> db = pickledb.load('test.db', False)
+src
 
->>> db.set('key', 'value')
+1. cache: FIFO cache code
 
->>> db.get('key')
-'value'
+2. graph: graphs generated from the workloads
 
->>> db.dump()
-True
-```
+3. interface: interface code
 
-## Easy to Install
-```python
-$ pip install pickledb
-```
+        queryEngine.py
 
-## Links
-* [website](https://patx.github.io/pickledb)
-* [documentation](https://patx.github.io/pickledb/commands.html)
-* [pypi](http://pypi.python.org/pypi/pickleDB)
-* [github repo](https://github.com/patx/pickledb)
+4. perf\_eval: performance evaluation code
 
+        atomicOnOffTest.py
 
-## Latest Release Notes (version: 0.9)
-* *rem(key)* now returns *False* instead of raising an exception (0.9dev)
-* Change lrem(name) to *lremlist(name)* (0.9)
-* Add *lremvalue(name, value)* (0.9)
-* Add load() option to use sigterm handler or not (0.9)
-* All *keys* must now be strings (0.8)
-* All *names* for lists must now be strings (0.8)
-* All *names* for dicts must now be strings (0.8)
-* The get(key) function now returns *False* instead of None if there is no key (0.8)
-* Switched to Python's built in json module from simplejson (0.8.1)
+5. picklesrc: original pickled code base
 
+6. storage: backend storage code
+
+        variable.py
+
+**Configure Paths to run the code from this branch:**
+
+1. In variable.py - Change the &#39;databaseStorageFilePath&#39; to an appropriate file path.
+2. In atomicOnOffTest.py - Change the &#39;configFile&#39; to a json file where the configuration for the workload is present.
+3. In atomicOnOffTest.py - Change the &#39;workloadFile&#39; to a json file where the workload is present.
+4. In atomicOnOffTest.py - Change the &#39;latencyRecordFile&#39; to a json file where the latencies of the workload can be recorded.
+
+**There are two ways to run the implementation from the work1 branch:**
+
+1. We can run it directly from the queryEngine.py. This will give us a menu driven interface to choose a query to run from. The query descriptions are mentioned in comments below every function.
+2. We can also run a workload from atomicOnOffTest.py. This calls the APIs from the queryEngine.py and runs the given workload to produce latency records for each workload.
