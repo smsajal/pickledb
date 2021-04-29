@@ -28,10 +28,10 @@ PICKLEDB
 
 To run the code from this branch:
 
-1. In variable.py  Change the &#39;databaseStorageFilePath&#39; to an appropriate file path.
-2. In atomicOnOffTest.py  Change the &#39;configFile&#39; to a json file where the configuration for the workload is present.
-3. In atomicOnOffTest.py  Change the &#39;workloadFile&#39; to a json file where the workload is present.
-4. In atomicOnOffTest.py  Change the &#39;latencyRecordFile&#39; to a json file where the latencies of the workload can be recorded.
+1. In variable.py - Change the &#39;databaseStorageFilePath&#39; to an appropriate file path.
+2. In atomicOnOffTest.py - Change the &#39;configFile&#39; to a json file where the configuration for the workload is present.
+3. In atomicOnOffTest.py - Change the &#39;workloadFile&#39; to a json file where the workload is present.
+4. In atomicOnOffTest.py - Change the &#39;latencyRecordFile&#39; to a json file where the latencies of the workload can be recorded.
 
 There are two ways to run the implementation from the work1 branch:
 
