@@ -10,9 +10,9 @@ import src.cache.caheDict as cache
 
 def joinTest():
 
-	configFile = "/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/joinConfig.json"
-	workloadFile = "/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/joinWorkload.json"
-	latencyRecordFile = "/Users/avimitachatterjee/Documents/PSU/CourseWork/541 - DBMS/Project/pickledb/src/perf_eval/joinLatency500.json"
+	configFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinConfig.json"
+	workloadFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinWorkload.json"
+	latencyRecordFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinLatency5000.json"
 
 
 	configuration=FileUtility.readJsonFile(configFile)
