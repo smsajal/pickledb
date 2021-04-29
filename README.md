@@ -1,8 +1,8 @@
-Branch work1:
+**Branch work1:**
 
 This branch demonstrates our extended version of pickled in the form of an interaction between front end Query Engine and the storage system without any cache implementation.
 
-Folder Structure:
+**Folder Structure:**
 
 PICKLEDB
 
@@ -26,14 +26,14 @@ PICKLEDB
 
         variable.py
 
-To run the code from this branch:
+**To run the code from this branch:**
 
 1. In variable.py - Change the &#39;databaseStorageFilePath&#39; to an appropriate file path.
 2. In atomicOnOffTest.py - Change the &#39;configFile&#39; to a json file where the configuration for the workload is present.
 3. In atomicOnOffTest.py - Change the &#39;workloadFile&#39; to a json file where the workload is present.
 4. In atomicOnOffTest.py - Change the &#39;latencyRecordFile&#39; to a json file where the latencies of the workload can be recorded.
 
-There are two ways to run the implementation from the work1 branch:
+**There are two ways to run the implementation from the work1 branch:**
 
 1. We can run it directly from the queryEngine.py. This will give us a menu driven interface to choose a query to run from. The query descriptions are mentioned in comments below every function.
 2. We can also run a workload from atomicOnOffTest.py. This calls the APIs from the queryEngine.py and runs the given workload to produce latency records for each workload.
