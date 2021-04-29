@@ -18,6 +18,7 @@ def makeGraphAtomic(data1, data2, outfilename):
     percentiles = ['mean', '50P', '90P', '95P', '99P']
     X = np.arange(len(percentiles))
     # ax = plt.subplot(111)
+    plt.rcParams.update({'font.size': 16})
     plt.bar(X-0.2, data1, width=0.4, color='c', label='atomic off')
     plt.bar(X+0.2, data2, width=0.4, color='m', label='atomic on')
     plt.xticks(X, percentiles)
@@ -34,6 +35,7 @@ def makeGraphCache(data1, data2, outfilename):
     percentiles = ['mean', '50P', '90P', '95P', '99P']
     X = np.arange(len(percentiles))
     # ax = plt.subplot(111)
+    plt.rcParams.update({'font.size': 16})
     plt.bar(X-0.2, data1, width=0.4, color='c', label='Cache absent')
     plt.bar(X+0.2, data2, width=0.4, color='m', label='Cache present')
     plt.xticks(X, percentiles)
@@ -50,8 +52,9 @@ def makeGraphWB(data1, data2, outfilename):
     percentiles = ['mean', '50P', '90P', '95P', '99P']
     X = np.arange(len(percentiles))
     # ax = plt.subplot(111)
-    plt.bar(X-0.2, data1, width=0.4, color='c', label='Base implementation')
-    plt.bar(X+0.2, data2, width=0.4, color='m', label='Writeback implementation')
+    plt.rcParams.update({'font.size': 16})
+    plt.bar(X-0.2, data1, width=0.4, color='c', label='Write-through')
+    plt.bar(X+0.2, data2, width=0.4, color='m', label='Write-back')
     plt.xticks(X, percentiles)
     plt.xlabel("Percentiles")
     plt.ylabel("Latency(nanosec)")
@@ -79,18 +82,60 @@ def makeGraphJoin(data1, data2, data3, outfilename):
     plt.savefig(outfilename)
     plt.clf()
 
-if __name__ == '__main__':
-    file1 = "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/results/atomicOff_nonCache_latencies.json"
-    file2 = "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/results/atomicOn_nonCache_latencies.json"
 
+def makeGraphAtomicFromFile():
+    file1 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/data/atomicOFF_cache_latencies.json"
+    file2 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/data/atomicON_cache_latencies.json"
 
-    # makeGraphAtomic(data1=data1, data2=data2, outfilename='graph/atomicOnOff_noncache_workload' + str(workload) + '.png')
-    # makeGraphJoin(data1=data1, data2=data2, data3=data2, outfilename='graph/joinTest' + str(workload) + '.png')
     for i in range(1, 4):
         print(i)
         workload = i
-        data1 = readData ( file1, str ( workload ) )
-        data2 = readData ( file2, str ( workload ) )
-        # makeGraphCache(data1=data1, data2=data2, outfilename='graph/cacheOnOff_atomicOn_workload' + str(workload) + '.png')
-        makeGraphAtomic ( data1 = data1, data2 = data2, outfilename = 'graph/atomicOnOff_noncache_workload' + str ( workload ) + '.png' )
-        # makeGraphWB ( data1 = data1, data2 = data2, outfilename = 'graph/cacheWB_atomicOn_workload' + str ( workload ) + '.png' )
+        data1 = readData(file1, str(workload))
+        data2 = readData(file2, str(workload))
+        makeGraphAtomic(data1=data1, data2=data2,
+                        outfilename='graph/atomicOnOff_cache_Reportworkload' + str(workload) + '.png')
+
+def makeGraphCacheFromFile():
+    file1 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/data/atomicOn_nonCache_latencies.json"
+    file2 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/data/atomicON_cache_latencies.json"
+
+    for i in range(1, 4):
+        print(i)
+        workload = i
+        data1 = readData(file1, str(workload))
+        data2 = readData(file2, str(workload))
+        makeGraphCache(data1=data1, data2=data2,
+                        outfilename='graph/cacheOnOff_atomicON_Reportworkload' + str(workload) + '.png')
+
+def makeGraphWBFromFile():
+    file1 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/data/atomicON_cache_latencies.json"
+    file2 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/data/atomicOn_writeBack_latencies.json"
+
+    for i in range(1, 4):
+        print(i)
+        workload = i
+        data1 = readData(file1, str(workload))
+        data2 = readData(file2, str(workload))
+        makeGraphWB(data1=data1, data2=data2,
+                        outfilename='graph/cacheWB_atomicON_Reportworkload' + str(workload) + '.png')
+
+
+if __name__ == '__main__':
+
+    # makeGraphAtomicFromFile()
+    # makeGraphCacheFromFile()
+    makeGraphWBFromFile()
+    # file1 = "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/results/atomicOff_nonCache_latencies.json"
+    # file2 = "/Users/sxs2561/Documents/OneDrive - The Pennsylvania State University/Course Work/cse_541/project/results/atomicOn_nonCache_latencies.json"
+    #
+    #
+    # # makeGraphAtomic(data1=data1, data2=data2, outfilename='graph/atomicOnOff_noncache_workload' + str(workload) + '.png')
+    # # makeGraphJoin(data1=data1, data2=data2, data3=data2, outfilename='graph/joinTest' + str(workload) + '.png')
+    # for i in range(1, 4):
+    #     print(i)
+    #     workload = i
+    #     data1 = readData ( file1, str ( workload ) )
+    #     data2 = readData ( file2, str ( workload ) )
+    #     # makeGraphCache(data1=data1, data2=data2, outfilename='graph/cacheOnOff_atomicOn_workload' + str(workload) + '.png')
+    #     makeGraphAtomic ( data1 = data1, data2 = data2, outfilename = 'graph/atomicOnOff_noncache_workload' + str ( workload ) + '.png' )
+    #     # makeGraphWB ( data1 = data1, data2 = data2, outfilename = 'graph/cacheWB_atomicOn_workload' + str ( workload ) + '.png' )
