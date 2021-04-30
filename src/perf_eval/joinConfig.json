@@ -6,9 +6,5 @@
   {
     "queryType": "joinHashQueries",
     "totalQueries": 5000
-  },
-  {
-    "queryType": "joinLoopQueries",
-    "totalQueries": 5000
   }
 ]

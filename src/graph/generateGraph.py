@@ -68,15 +68,16 @@ def makeGraphJoin(data1, data2, data3, outfilename):
     X = np.arange(len(percentiles))
     width=0.25
     # ax = plt.subplot(111)
-    plt.bar(X-width, data1, width=width, color='y', label='Sort-Merge')
-    plt.bar(X, data2, width=width, color='m', label='Hash Join')
-    plt.bar(X+width, data3, width=width, color='c', label='Inner Loop')
+    plt.rcParams.update({'font.size': 16})
+    plt.bar(X-width, data1, width=width, color='y', label='SM')
+    plt.bar(X, data2, width=width, color='m', label='Hash')
+    plt.bar(X+width, data3, width=width, color='c', label='Loop')
     plt.ylim(top=100000000)
     plt.xticks(X, percentiles)
     plt.xlabel("Percentiles")
     plt.ylabel("Latency(nanosec)")
     # plt.title("Number of Students in each group")
-    plt.legend(bbox_to_anchor=(0.2,0.75), loc=3)
+    plt.legend(bbox_to_anchor=(0.18,0.68), loc=3)
     # plt.show()
     plt.savefig(outfilename)
     plt.clf()
@@ -105,6 +106,7 @@ def makeGraphCacheSize(data1, data2, data3, outfilename):
     X = np.arange(len(percentiles))
     width=0.25
     # ax = plt.subplot(111)
+    plt.rcParams.update({'font.size': 16})
     plt.bar(X-width, data1, width=width, color='y', label='Size=40')
     plt.bar(X, data2, width=width, color='m', label='Size=70')
     plt.bar(X+width, data3, width=width, color='c', label='Size=100')
@@ -118,10 +120,20 @@ def makeGraphCacheSize(data1, data2, data3, outfilename):
     plt.savefig(outfilename)
     plt.clf()
 
+def makeGraphJoinFile():
+    file1 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinLatency5000_det2.json"
+    datasortmerge = readData(file1, "1")
+    datahashjoin = readData(file1, "2")
+    # datanestedloop = readData(file1, "3")
+
+    # makeGraphJoin(data1=datasortmerge, data2=datahashjoin, data3=datanestedloop, outfilename = 'graph/join5000Report_cache_atomicOn_legend.png')
+
+
 if __name__ == '__main__':
-    file1 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/atomicON_cache_latencies_40.json"
-    file2 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/atomicON_cache_latencies_70.json"
-    file3 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/atomicON_cache_latencies_100.json"
+    makeGraphJoinFile()
+    # file1 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/atomicON_cache_latencies_40.json"
+    # file2 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/atomicON_cache_latencies_70.json"
+    # file3 = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/atomicON_cache_latencies_100.json"
     # makeGraphAtomic(data1=data1, data2=data2, outfilename='graph/atomicOnOff_noncache_workload' + str(workload) + '.png')
     # makeGraphJoin(data1=data1, data2=data2, data3=data2, outfilename='graph/joinTest' + str(workload) + '.png')
     # for i in range(1, 4):
@@ -140,10 +152,10 @@ if __name__ == '__main__':
     # makeGraphJoin(data1=datasortmerge, data2=datahashjoin, data3=datanestedloop, outfilename = 'graph/join5000_cache_atomicOn_legend.png')
     # makeGraphJoinMergeHash(data1=datasortmerge, data2=datahashjoin, outfilename='graph/join5000_cache_atomicOn_MH.png')
 
-    for i in range(1, 4):
-        print(i)
-        workload = i
-        data1 = readData ( file1, str ( workload ) )
-        data2 = readData ( file2, str ( workload ) )
-        data3 = readData ( file3, str ( workload ) )
-        makeGraphCacheSize(data1, data2, data3, 'graph/cacheSize_workload' + str ( workload ) + '.png')
+    # for i in range(1, 4):
+    #     print(i)
+    #     workload = i
+    #     data1 = readData ( file1, str ( workload ) )
+    #     data2 = readData ( file2, str ( workload ) )
+    #     data3 = readData ( file3, str ( workload ) )
+    #     makeGraphCacheSize(data1, data2, data3, 'graph/cacheSize_Report_workload' + str ( workload ) + '.png')
