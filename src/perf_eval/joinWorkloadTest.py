@@ -12,7 +12,7 @@ def joinTest():
 
 	configFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinConfig.json"
 	workloadFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinWorkload.json"
-	latencyRecordFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinLatency5000_2.json"
+	latencyRecordFile = "/Users/rxh655/Documents/Spring 2021/CSE 541/Project/pickledb/src/perf_eval/joinLatency5000.json"
 
 
 	configuration=FileUtility.readJsonFile(configFile)
@@ -85,6 +85,6 @@ def joinTestDet():
 
 if __name__ == '__main__':
 	a=datetime.datetime.now()
-	joinTestDet()
+	joinTest()
 	b=datetime.datetime.now()
 	print("total experiment duration: ",(b-a))
