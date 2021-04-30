@@ -1,0 +1,14 @@
+[
+  {
+    "queryType": "joinMergeQueries",
+    "totalQueries": 1000
+  },
+  {
+    "queryType": "joinHashQueries",
+    "totalQueries": 1000
+  },
+  {
+    "queryType": "joinLoopQueries",
+    "totalQueries": 1000
+  }
+]
