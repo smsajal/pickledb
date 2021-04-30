@@ -1,6 +1,6 @@
 import src.interfaces.queryEngine as QueryEngine
 
-cacheSize = 70
+cacheSize = 100
 cache = {}
 
 def cache_checkQuery(query):

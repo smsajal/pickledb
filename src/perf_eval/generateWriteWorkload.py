@@ -3,8 +3,9 @@ import string
 import json
 from src.storage.table import Table
 import src.storage.fileUtility as FileUtility
-# from src.storage.tempResult import TempResult
+from src.storage.tempResult import TempResult
 # from src.interfaces import queryEngine
+from src.storage.join import sortedMergeJoin, hashJoin, nestedLoopJoin
 
 letters = string.ascii_lowercase
 numbers = string.digits
@@ -233,11 +234,18 @@ def generateWriteWorkload(N):
 
 
 if __name__ == '__main__':
-    movies = Table(tableName="imdb_movies", dbName="imdb_kaggle_small").vanillaSelect()
-    names = Table(tableName="imdb_names", dbName="imdb_kaggle_small").vanillaSelect()
-    ratings = Table(tableName="imdb_ratings", dbName="imdb_kaggle_small").vanillaSelect()
-    title_principals = Table(tableName="title_principals", dbName="imdb_kaggle_small").vanillaSelect()
-    generateWriteWorkload(15000)
+    movies = TempResult(Table(tableName="imdb_movies", dbName="imdb_kaggle_small").vanillaSelect())
+    names = TempResult(Table(tableName="imdb_names", dbName="imdb_kaggle_small").vanillaSelect())
+    ratings = TempResult(Table(tableName="imdb_ratings", dbName="imdb_kaggle_small").vanillaSelect())
+    title_principals = TempResult(Table(tableName="title_principals", dbName="imdb_kaggle_small").vanillaSelect())
+    # generateWriteWorkload(15000)
+
+    # print(eval("sortedMergeJoin(movies,'imdb_title_id', ratings,'imdb_title_id').limit(100).vanillaSelect(['imdb_title_id', 'title', 'genre', 'females_30age_avg_vote', 'males_30age_votes']).limit(2).print()"))
+    x = eval("sortedMergeJoin(names,'imdb_name_id', title_principals,'imdb_name_id').limit(100).vanillaSelect(['imdb_name_id', 'name', 'birth_name', 'category', 'job', 'characters'])")
+    # x=eval("sortedMergeJoin(names,'imdb_name_id', title_principals,'imdb_name_id').limit(100)")
+    # print("x is: ",len(x.getData()))
+    # x.vanillaSelect(['imdb_title_id', 'title', 'males_30age_votes']).print()
+    # y=eval("x.vanillaSelect(['imdb_title_id', 'title', 'genre', 'females_30age_avg_vote', 'males_30age_votes'])")
 
 # if __name__ == '__main__':
 #     # q = generateMovies("tt0060001")
