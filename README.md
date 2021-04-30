@@ -1,6 +1,6 @@
 **Branch joinBranch:**
 
-This branch demonstrates our extended version of pickled in the form of an interaction between front end Query Engine and the storage system along with a **Read-Through, Write-Around cache** implementation to make a comparison study between **Nested Loop join, Sort Merged join and Hash join**.
+This branch demonstrates our extended version of pickleDB in the form of an interaction between front end Query Engine and the storage system along with a **Read-Through, Write-Around cache** implementation to make a comparison study between **Nested Loop join, Sort Merged join and Hash join**.
 
 **Folder Structure:**
 
