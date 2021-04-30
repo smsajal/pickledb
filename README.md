@@ -6,6 +6,89 @@ This branch demonstrates our extended version of pickled in the form of an inter
 
 PICKLEDB
 
+```
+.
+├── LICENSE
+├── README.md
+├── docs
+│   ├── commands.html
+│   ├── favicon.ico
+│   ├── index.html
+│   └── logo.png
+├── inputs
+│   ├── atomic_tester_data.json
+│   ├── name_basics.json
+│   └── name_basics_first_10k.json
+└── src
+    ├── cache
+    │   ├── __pycache__
+    │   │   ├── cache.cpython-37.pyc
+    │   │   └── caheDict.cpython-37.pyc
+    │   ├── cache.py
+    │   └── caheDict.py
+    ├── graph
+    ├── interfaces
+    │   ├── __init__.py
+    │   ├── __pycache__
+    │   │   ├── __init__.cpython-37.pyc
+    │   │   ├── queryEngine.cpython-37.pyc
+    │   │   └── storageInterface.cpython-37.pyc
+    │   ├── interfaceTester.py
+    │   ├── queryEngine.py
+    │   └── storageInterface.py
+    ├── perf_eval
+    │   ├── __init__.py
+    │   ├── __pycache__
+    │   │   ├── __init__.cpython-37.pyc
+    │   │   └── query.cpython-37.pyc
+    │   ├── atomicOFF_cache_latencies__cacheClear.json
+    │   ├── atomicOFF_cache_latencies__noCacheClear.json
+    │   ├── atomicON_cache_latencies_AV.json
+    │   ├── atomicOff_writeBack_latencies.json
+    │   ├── atomicOnConfig.json
+    │   ├── atomicOnOffTest.py
+    │   ├── atomicOnTest_trial.py
+    │   ├── atomicOn_latencies.json
+    │   ├── atomicOn_writeBack_latencies.json
+    │   ├── config.json
+    │   ├── generateWriteWorkload.py
+    │   ├── latencies.json
+    │   ├── query.py
+    │   ├── readWorkload.json
+    │   ├── tempWorkload.json
+    │   ├── writeWorkload.json
+    │   └── writeWorkload_pretty.json
+    ├── pickleSrc
+    │   ├── pickledb.py
+    │   ├── setup.py
+    │   └── tests.py
+    └── storage
+        ├── __init__.py
+        ├── __pycache__
+        │   ├── __init__.cpython-37.pyc
+        │   ├── dataFile.cpython-37.pyc
+        │   ├── database.cpython-37.pyc
+        │   ├── fileTracker.cpython-37.pyc
+        │   ├── fileUtility.cpython-37.pyc
+        │   ├── join.cpython-37.pyc
+        │   ├── table.cpython-37.pyc
+        │   ├── tempResult.cpython-37.pyc
+        │   └── variables.cpython-37.pyc
+        ├── dataFile.py
+        ├── database.py
+        ├── dump
+        ├── fileTracker.py
+        ├── fileUtility.py
+        ├── imdbInputParser.py
+        ├── join.py
+        ├── runner.py
+        ├── table.py
+        ├── tempResult.py
+        └── variables.py
+
+
+```
+
 src
 
 1. cache: FIFO cache code
