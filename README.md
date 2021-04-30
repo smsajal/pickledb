@@ -5,7 +5,125 @@ This branch demonstrates our extended version of pickled in the form of an inter
 **Folder Structure:**
 
 PICKLEDB
+```
+.
+├── LICENSE
+├── README.md
+├── data
+│   ├── atomicOFF_cache_latencies.json
+│   ├── atomicON_cache_latencies.json
+│   ├── atomicOff_nonCache_latencies.json
+│   ├── atomicOff_writeBack_latencies.json
+│   ├── atomicOn_nonCache_latencies.json
+│   └── atomicOn_writeBack_latencies.json
+├── docs
+│   ├── commands.html
+│   ├── favicon.ico
+│   ├── index.html
+│   └── logo.png
+├── inputs
+│   ├── atomic_tester_data.json
+│   ├── name_basics.json
+│   └── name_basics_first_10k.json
+└── src
+    ├── cache
+    │   └── __pycache__
+    │       ├── cache.cpython-37.pyc
+    │       └── caheDict.cpython-37.pyc
+    ├── graph
+    │   ├── __init__.py
+    │   ├── generateGraph.py
+    │   └── graph
+    │       ├── atomicOnOff_WB_workload1.png
+    │       ├── atomicOnOff_WB_workload2.png
+    │       ├── atomicOnOff_WB_workload3.png
+    │       ├── atomicOnOff_cache_Reportworkload1.png
+    │       ├── atomicOnOff_cache_Reportworkload2.png
+    │       ├── atomicOnOff_cache_Reportworkload3.png
+    │       ├── atomicOnOff_cache_workload1.png
+    │       ├── atomicOnOff_cache_workload2.png
+    │       ├── atomicOnOff_cache_workload3.png
+    │       ├── atomicOnOff_noncache_workload1.png
+    │       ├── atomicOnOff_noncache_workload2.png
+    │       ├── atomicOnOff_noncache_workload3.png
+    │       ├── atomic_workload1.png
+    │       ├── atomic_workload2.png
+    │       ├── atomic_workload3.png
+    │       ├── cacheOnOff_atomicON_Reportworkload1.png
+    │       ├── cacheOnOff_atomicON_Reportworkload2.png
+    │       ├── cacheOnOff_atomicON_Reportworkload3.png
+    │       ├── cacheOnOff_atomicOn_workload1.png
+    │       ├── cacheOnOff_atomicOn_workload2.png
+    │       ├── cacheOnOff_atomicOn_workload3.png
+    │       ├── cacheWB_atomicON_Reportworkload1.png
+    │       ├── cacheWB_atomicON_Reportworkload2.png
+    │       ├── cacheWB_atomicON_Reportworkload3.png
+    │       ├── cacheWB_atomicOn_workload1.png
+    │       ├── cacheWB_atomicOn_workload2.png
+    │       ├── cacheWB_atomicOn_workload3.png
+    │       └── joinTest3.png
+    ├── interfaces
+    │   ├── __init__.py
+    │   ├── __pycache__
+    │   │   ├── __init__.cpython-37.pyc
+    │   │   ├── queryEngine.cpython-37.pyc
+    │   │   └── storageInterface.cpython-37.pyc
+    │   ├── interfaceTester.py
+    │   ├── queryEngine.py
+    │   └── storageInterface.py
+    ├── perf_eval
+    │   ├── __init__.py
+    │   ├── __pycache__
+    │   │   ├── __init__.cpython-37.pyc
+    │   │   └── query.cpython-37.pyc
+    │   ├── atomicOff_nonCache_latencies.json
+    │   ├── atomicOnConfig.json
+    │   ├── atomicOnOffTest.py
+    │   ├── atomicOnTest_trial.py
+    │   ├── atomicOn_latencies.json
+    │   ├── atomicOn_nonCache_latencies.json
+    │   ├── config.json
+    │   ├── generateWriteWorkload.py
+    │   ├── joinConfig.json
+    │   ├── joinLatency.json
+    │   ├── joinWorkload.json
+    │   ├── joinWorkloadTest.py
+    │   ├── latencies.json
+    │   ├── query.py
+    │   ├── readWorkload.json
+    │   ├── temp.json
+    │   ├── tempWorkload.json
+    │   ├── writeWorkload.json
+    │   └── writeWorkload_pretty.json
+    ├── pickleSrc
+    │   ├── pickledb.py
+    │   ├── setup.py
+    │   └── tests.py
+    └── storage
+        ├── __init__.py
+        ├── __pycache__
+        │   ├── __init__.cpython-37.pyc
+        │   ├── dataFile.cpython-37.pyc
+        │   ├── database.cpython-37.pyc
+        │   ├── fileTracker.cpython-37.pyc
+        │   ├── fileUtility.cpython-37.pyc
+        │   ├── join.cpython-37.pyc
+        │   ├── table.cpython-37.pyc
+        │   ├── tempResult.cpython-37.pyc
+        │   └── variables.cpython-37.pyc
+        ├── dataFile.py
+        ├── database.py
+        ├── dump
+        ├── fileTracker.py
+        ├── fileUtility.py
+        ├── imdbInputParser.py
+        ├── join.py
+        ├── runner.py
+        ├── table.py
+        ├── tempResult.py
+        └── variables.py
 
+```
 src
 
 1. cache: FIFO cache code
